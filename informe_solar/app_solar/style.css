@@ -1,0 +1,261 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background-color: #f0f2f5; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Oculta barras de desplazamiento no deseadas en el body */
+}
+
+/* Contenedor principal de la aplicación (simula un móvil) */
+.app-container {
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para simular un móvil */
+    height: 100vh; /* Altura completa de la ventana */
+    max-height: 800px; /* Altura máxima para simular un móvil */
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Asegura que el contenido interno se desborde con scroll */
+    border-radius: 10px; /* Bordes redondeados para simular un dispositivo */
+}
+
+/* Contenido principal que cambia */
+.main-content {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    overflow-y: auto; /* Permite desplazamiento vertical si el contenido es largo */
+    padding: 15px;
+    padding-bottom: 70px; /* Espacio para la barra de navegación */
+    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
+}
+
+/* Pantallas (secciones) */
+.screen {
+    display: none; /* Por defecto, todas las pantallas están ocultas */
+}
+
+.screen.active {
+    display: block; /* La pantalla activa se muestra */
+}
+
+/* Títulos de las pantallas */
+.screen-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Sección de la imagen y estado */
+.solar-panel-section {
+    position: relative;
+    width: calc(100% + 30px); /* Ocupa el ancho completo de la app-container, + el padding lateral */
+    margin: -15px -15px 15px -15px; /* Elimina el padding de main-content */
+    height: 200px; /* Altura fija para la imagen */
+    overflow: hidden;
+    border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+.solar-panel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre el área manteniendo la relación de aspecto */
+    display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+.system-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.system-status.status-optimus {
+    background-color: #4CAF50; /* Verde para óptimo */
+}
+
+/* Estilos de las "tarjetas" (cards) */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Salud del Sistema */
+.health-item {
+    font-size: 15px;
+    color: #555;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #007bff; /* Azul para resaltar números/fechas */
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 8px;
+    margin: 10px 0 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background-color: #28a745; /* Verde para la barra de progreso */
+    height: 100%;
+    border-radius: 5px;
+}
+
+.health-item small {
+    display: block;
+    text-align: right;
+    color: #888;
+    font-size: 12px;
+}
+
+/* Mantenimiento */
+.maintenance-item {
+    display: flex;
+    align-items: flex-start; /* Alinea los íconos con la parte superior del texto */
+    margin-bottom: 15px;
+}
+
+.maintenance-item:last-child {
+    margin-bottom: 0;
+}
+
+.maintenance-item i {
+    font-size: 20px;
+    margin-right: 12px;
+    min-width: 20px; /* Para que los iconos tengan un ancho consistente */
+    text-align: center;
+    line-height: 1; /* Para alinear el ícono con el texto */
+}
+
+.icon-green {
+    color: #28a745; /* Verde para los iconos de mantenimiento */
+}
+
+.item-details span {
+    display: block;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Alertas */
+.card-alert {
+    background-color: #ffebeb; /* Fondo rosado claro para alertas */
+    border: 1px solid #dc3545; /* Borde rojo */
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espacia los elementos */
+    font-size: 15px;
+}
+
+.alert-item i {
+    font-size: 22px;
+    margin-right: 12px;
+}
+
+.icon-red {
+    color: #dc3545; /* Rojo para el icono de alerta */
+}
+
+.alert-message {
+    color: #dc3545; /* Texto de mensaje de alerta en rojo */
+    font-weight: bold;
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+}
+
+.clear-alert-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    transition: color 0.2s ease;
+}
+
+.clear-alert-btn:hover {
+    color: #333;
+}
+
+/* Barra de navegación inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 0;
+    position: sticky; /* Sticky para que se quede en la parte inferior del app-container */
+    bottom: 0;
+    width: 100%;
+    z-index: 100; /* Asegura que esté por encima de otros contenidos */
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    padding: 5px 0;
+    cursor: pointer;
+    flex: 1; /* Distribuye el espacio equitativamente */
+    transition: color 0.2s ease;
+}
+
+.nav-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: #007bff; /* Color azul para el ítem activo */
+}
+
+.nav-item:focus {
+    outline: none; /* Elimina el contorno de foco por defecto */
+}
+
+/* Media Queries para pantallas más pequeñas (como móviles reales) */
+@media (max-width: 400px) {
+    .app-container {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0; /* Elimina los bordes redondeados en pantallas completas */
+        box-shadow: none;
+    }
+}
