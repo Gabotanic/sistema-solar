@@ -11,23 +11,25 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    overflow: hidden; /* Oculta barras de desplazamiento no deseadas en el body */
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    overflow-y: auto; /* ¡Añade esto para permitir el scroll en el body si el contenido es más alto! */
+    /* REMUEVE: overflow: hidden; si lo tenías */
 }
 
 /* Contenedor principal de la aplicación (simula un móvil) */
 .app-container {
     width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    max-height: 800px;
-    /*background-color: #ffffff; */
+    max-width: 400px; /* Ancho máximo para simular un móvil */
+    /* REMUEVE: height: 100vh; */
+    /* REMUEVE: max-height: 800px; */
+    min-height: 100vh; /* ¡Añade esto! Asegura que la app ocupe al menos toda la altura de la ventana en el móvil */
+    background-color: #ffffff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    /* REMUEVE: overflow: hidden; */ /* main-content ya maneja su propio scroll */
     border-radius: 10px;
-    position: relative; /* ¡IMPORTANTE: Añade esto! */
+    position: relative; /* Para el pseudo-elemento */
 }
 
 /* Pseudo-elemento para el logo transparente de fondo */
@@ -50,11 +52,13 @@ body {
 
 /* Contenido principal que cambia */
 .main-content {
-    flex-grow: 1; /* Ocupa todo el espacio disponible */
-    overflow-y: auto; /* Permite desplazamiento vertical si el contenido es largo */
+    flex-grow: 1; /* Esto es clave para que ocupe el espacio flexible */
+    overflow-y: auto; /* Esto es clave para que tenga su propio scroll */
     padding: 15px;
-    padding-bottom: 85px; /* Espacio para la barra de navegación */
-    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
+    padding-bottom: 85px; /* Mantén o aumenta este valor */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1;
 }
 
 /* Pantallas (secciones) */
@@ -281,10 +285,10 @@ body {
 @media (max-width: 400px) {
     .app-container {
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh; /* ¡Cambia esto a min-height! */
         max-width: none;
         max-height: none;
-        border-radius: 0; /* Elimina los bordes redondeados en pantallas completas */
+        border-radius: 0;
         box-shadow: none;
     }
 }
