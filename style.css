@@ -34,7 +34,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #ffffff; /* ¡Añade esto! Provee el fondo blanco base */
-    background-image: url('mantensolar_logo.png'); /* Ruta a tu logo */
+    background-image: url('mantensolar_logo_notext.png'); /* Ruta a tu logo */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100%; /* Si quieres que ocupe todo el espacio */
