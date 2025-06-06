@@ -215,10 +215,15 @@ body {
     background-color: #fff;
     border-top: 1px solid #e0e0e0;
     padding: 10px 0;
-    position: sticky; /* Sticky para que se quede en la parte inferior del app-container */
+    position: fixed; /* CAMBIO CLAVE: fijo a la ventana del navegador */
     bottom: 0;
-    width: 100%;
-    z-index: 100; /* Asegura que esté por encima de otros contenidos */
+    left: 0; /* Asegura que empiece desde el borde izquierdo */
+    right: 0; /* Asegura que termine en el borde derecho */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 100;
+    /* Para que en el escritorio, la barra inferior se ajuste al ancho del app-container */
+    max-width: 400px; /* Debe coincidir con el max-width del .app-container */
+    margin: 0 auto; /* Para centrar la barra en pantallas grandes */
 }
 
 .nav-item {
