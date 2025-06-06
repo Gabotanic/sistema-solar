@@ -48,7 +48,7 @@ body {
     flex-grow: 1; /* Ocupa todo el espacio disponible */
     overflow-y: auto; /* Permite desplazamiento vertical si el contenido es largo */
     padding: 15px;
-    padding-bottom: 95px; /* Espacio para la barra de navegación */
+    padding-bottom: 100px; /* Espacio para la barra de navegación */
     -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
 }
 
