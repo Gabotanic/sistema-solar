@@ -36,8 +36,8 @@ body {
     background-image: url('mantensolar_logo.png'); /* Ruta a tu logo */
     background-repeat: no-repeat; /* Para que la imagen no se repita */
     background-position: center center; /* Para centrar la imagen */
-    background-size: 60%; /* Ajusta el tamaño del logo (ej. 60% del contenedor) */
-    opacity: 0.08; /* Ajusta la transparencia (0.01 es muy tenue, 0.15 es más visible) */
+    background-size: 100%; /* Ajusta el tamaño del logo (ej. 60% del contenedor) */
+    opacity: 0.2; /* Ajusta la transparencia (0.01 es muy tenue, 0.15 es más visible) */
     z-index: -1; /* ¡IMPORTANTE: Lo coloca detrás de todo el contenido! */
     pointer-events: none; /* Evita que el logo interfiera con clics o selecciones de texto */
 }
