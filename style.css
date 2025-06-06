@@ -13,15 +13,33 @@ body {
 /* Contenedor principal de la aplicación (simula un móvil) */
 .app-container {
     width: 100%;
-    max-width: 400px; /* Ancho máximo para simular un móvil */
-    height: 100vh; /* Altura completa de la ventana */
-    max-height: 800px; /* Altura máxima para simular un móvil */
+    max-width: 400px;
+    height: 100vh;
+    max-height: 800px;
     background-color: #ffffff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Asegura que el contenido interno se desborde con scroll */
-    border-radius: 10px; /* Bordes redondeados para simular un dispositivo */
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative; /* ¡IMPORTANTE: Añade esto! */
+}
+
+/* Pseudo-elemento para el logo transparente de fondo */
+.app-container::before {
+    content: ""; /* Obligatorio para pseudo-elementos */
+    position: absolute; /* Para posicionarlo con respecto al .app-container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('mantensolar_logo.png'); /* Ruta a tu logo */
+    background-repeat: no-repeat; /* Para que la imagen no se repita */
+    background-position: center center; /* Para centrar la imagen */
+    background-size: 60%; /* Ajusta el tamaño del logo (ej. 60% del contenedor) */
+    opacity: 0.08; /* Ajusta la transparencia (0.01 es muy tenue, 0.15 es más visible) */
+    z-index: -1; /* ¡IMPORTANTE: Lo coloca detrás de todo el contenido! */
+    pointer-events: none; /* Evita que el logo interfiera con clics o selecciones de texto */
 }
 
 /* Contenido principal que cambia */
