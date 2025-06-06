@@ -16,7 +16,7 @@ body {
     max-width: 400px;
     height: 100vh;
     max-height: 800px;
-    background-color: #ffffff;
+    /*background-color: #ffffff; */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -27,19 +27,20 @@ body {
 
 /* Pseudo-elemento para el logo transparente de fondo */
 .app-container::before {
-    content: ""; /* Obligatorio para pseudo-elementos */
-    position: absolute; /* Para posicionarlo con respecto al .app-container */
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: #ffffff; /* ¡Añade esto! Provee el fondo blanco base */
     background-image: url('mantensolar_logo.png'); /* Ruta a tu logo */
-    background-repeat: no-repeat; /* Para que la imagen no se repita */
-    background-position: center center; /* Para centrar la imagen */
-    background-size: 100%; /* Ajusta el tamaño del logo (ej. 60% del contenedor) */
-    opacity: 0.2; /* Ajusta la transparencia (0.01 es muy tenue, 0.15 es más visible) */
-    z-index: -1; /* ¡IMPORTANTE: Lo coloca detrás de todo el contenido! */
-    pointer-events: none; /* Evita que el logo interfiera con clics o selecciones de texto */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%; /* Si quieres que ocupe todo el espacio */
+    opacity: 0.1; /* Ajusta la transparencia. 0.1 a 0.2 es un buen rango */
+    z-index: 0; /* ¡IMPORTANTE: Cambia esto a 0! */
+    pointer-events: none;
 }
 
 /* Contenido principal que cambia */
