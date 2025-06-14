@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energía - Mi Sistema Solar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <h1 class="screen-title">Energía</h1>
+
+                <!-- Ahorros -->
+                <div class="card">
+                    <h3>Ahorros</h3>
+                    <div class="energy-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <div class="stat-details">
+                                <span>Ahorro en última factura</span>
+                                <span class="highlight">$53.205</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-piggy-bank"></i>
+                            <div class="stat-details">
+                                <span>Ahorro total acumulado</span>
+                                <span class="highlight">$423.222</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:200px; margin-top: 20px;">
+                        <canvas id="savingsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Impacto de mantenimiento -->
+                <div class="card">
+                    <h3>Impacto de Mantenimiento</h3>
+                    <div class="energy-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-broom"></i>
+                            <div class="stat-details">
+                                <span>Recuperación post-limpieza</span>
+                                <span class="highlight">+15%</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="stat-details">
+                                <span>Pérdidas por suciedad</span>
+                                <span class="highlight">-8%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulator-container" style="margin-top: 20px;">
+                        <h4>Simulador de Ahorros</h4>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 75%;"></div>
+                        </div>
+                        <small>Eficiencia actual: 75%</small>
+                    </div>
+                </div>
+
+                <!-- Horas sin suministro -->
+                <div class="card">
+                    <h3>Horas sin suministro</h3>
+                    <div class="energy-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-power-off"></i>
+                            <div class="stat-details">
+                                <span>Horas sin suministro de red</span>
+                                <span class="highlight">55 hrs</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-battery-three-quarters"></i>
+                            <div class="stat-details">
+                                <span>Autonomía promedio</span>
+                                <span class="highlight">8.2 hrs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:200px; margin-top: 20px;">
+                        <canvas id="outageChart"></canvas>
+                    </div>
+                    <div class="outage-stats" style="margin-top: 15px; display: flex; justify-content: space-between; font-size: 12px; color: #666;">
+                        <span>Último corte: 15/03/2024</span>
+                        <span>Duración: 2.5 hrs</span>
+                    </div>
+                </div>
+
+                <!-- Proyección de producción -->
+                <div class="card">
+                    <h3>Proyección de Producción</h3>
+                    <div class="chart-container" style="position: relative; height:200px;">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                    <div class="energy-stats" style="margin-top: 20px;">
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="stat-details">
+                                <span>Próximo mes</span>
+                                <span class="highlight">720 kWh</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar"></i>
+                            <div class="stat-details">
+                                <span>Próximo año</span>
+                                <span class="highlight">8,640 kWh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mi Sistema -->
+                <div class="card">
+                    <h3>Mi Sistema</h3>
+                    <div class="system-details">
+                        <div class="component-item clickable">
+                            <i class="fas fa-solar-panel"></i>
+                            <div class="component-details">
+                                <span>Inversor</span>
+                                <small>Huawei SUN2000-5KTL-M1</small>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="component-item clickable">
+                            <i class="fas fa-bolt"></i>
+                            <div class="component-details">
+                                <span>Paneles Solares</span>
+                                <small>12x Jinko Solar JKM400M-72H</small>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="component-item clickable">
+                            <i class="fas fa-battery-full"></i>
+                            <div class="component-details">
+                                <span>Baterías</span>
+                                <small>2x Huawei LUNA2000-10</small>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="system-info" style="margin-top: 20px;">
+                        <div class="stat-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="stat-details">
+                                <span>Ubicación</span>
+                                <span class="highlight">Chicauma, Chile</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-compass"></i>
+                            <div class="stat-details">
+                                <span>Orientación</span>
+                                <span class="highlight">Norte (0°)</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-angle-double-up"></i>
+                            <div class="stat-details">
+                                <span>Inclinación</span>
+                                <span class="highlight">33°</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="stat-details">
+                                <span>Puesta en marcha</span>
+                                <span class="highlight">15/03/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Botón de más estadísticas -->
+            <div class="more-stats-button" style="text-align: center; margin: 20px 0;">
+                <a href="estadisticas.html" class="stats-link" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                    <i class="fas fa-chart-bar" style="margin-right: 8px;"></i>
+                    Más estadísticas
+                </a>
+            </div>
+        </main>
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="resumen">
+                <i class="fas fa-chart-pie"></i>
+                <span>Resumen</span>
+            </button>
+            <button class="nav-item active" data-target="energia">
+                <i class="fas fa-bolt"></i>
+                <span>Energía</span>
+            </button>
+            <button class="nav-item" data-target="salud">
+                <i class="fas fa-heartbeat"></i>
+                <span>Salud</span>
+            </button>
+            <button class="nav-item" data-target="cuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+            </button>
+        </nav>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        // Gráfico de ahorros
+        const savingsCtx = document.getElementById('savingsChart').getContext('2d');
+        new Chart(savingsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                datasets: [{
+                    label: 'Ahorro Mensual ($)',
+                    data: [45000, 42000, 38000, 35000, 32000, 30000, 32000, 35000, 40000, 45000, 48000, 53205],
+                    borderColor: '#4CAF50',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString('es-CL');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de producción
+        const productionCtx = document.getElementById('productionChart').getContext('2d');
+        new Chart(productionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Producción Real',
+                    data: [720, 680, 620, 580, 520, 450],
+                    backgroundColor: '#4CAF50'
+                }, {
+                    label: 'Proyección',
+                    data: [750, 700, 650, 600, 550, 480],
+                    backgroundColor: 'rgba(76, 175, 80, 0.3)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'kWh'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de cortes de energía
+        const outageCtx = document.getElementById('outageChart').getContext('2d');
+        new Chart(outageCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Horas sin suministro',
+                    data: [12, 8, 15, 6, 9, 5],
+                    backgroundColor: '#FF6B6B',
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Horas'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud - Mi Sistema Solar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <h1 class="screen-title">Salud del Sistema</h1>
+                
+                <div class="card">
+                    <h3>Estado General</h3>
+                    <div class="health-status">
+                        <div class="status-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <div class="status-details">
+                                <span>Estado General</span>
+                                <span class="highlight status-good">Óptimo</span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="status-details">
+                                <span>Tiempo de Operación</span>
+                                <span class="highlight">1,825 días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Move degradation plot here -->
+                <div class="card">
+                    <h3>Análisis de Degradación del Sistema</h3>
+                    <span class="report-title">Degradación del Sistema</span>
+                    <div style="font-size:2rem; color:#E53935; font-weight:bold;">-2.5%</div>
+                    <div style="color:#888; font-size:0.95rem; margin-bottom:8px;">Últimos 12 meses <span style='color:#E53935;'>↓ -2.5%</span></div>
+                    <canvas id="degradationChart" height="120"></canvas>
+                </div>
+
+                <div class="card">
+                    <h3>Estado de Componentes Clave</h3>
+                    <div class="key-components">
+                        <div class="key-component-item">
+                            <div class="key-component-icon bg-green"><i class="fas fa-plug"></i></div>
+                            <div class="key-component-details">
+                                <span class="key-component-title">Inversor</span>
+                                <span class="key-component-sub">Modelo: ABC-123</span>
+                            </div>
+                            <span class="key-component-status status-operacional">Operacional</span>
+                        </div>
+                        <div class="key-component-item">
+                            <div class="key-component-icon bg-green"><i class="fas fa-solar-panel"></i></div>
+                            <div class="key-component-details">
+                                <span class="key-component-title">Paneles Solares</span>
+                                <span class="key-component-sub">Tipo: Monocristalino</span>
+                            </div>
+                            <span class="key-component-status status-optimo">Óptimo</span>
+                        </div>
+                        <div class="key-component-item">
+                            <div class="key-component-icon bg-blue"><i class="fas fa-battery-full"></i></div>
+                            <div class="key-component-details">
+                                <span class="key-component-title">Batería de Almacenamiento</span>
+                                <span class="key-component-sub">Capacidad: 10 kWh</span>
+                            </div>
+                            <span class="key-component-status status-cargando">Cargando</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Mantenimiento</h3>
+                    <div class="maintenance-info">
+                        <div class="maintenance-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="maintenance-details">
+                                <span>Última Revisión</span>
+                                <span class="highlight">15/04/2023</span>
+                            </div>
+                        </div>
+                        <div class="maintenance-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="maintenance-details">
+                                <span>Próxima Revisión</span>
+                                <span class="highlight">20/10/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informes de Mantenimiento moved here -->
+                <div class="card">
+                    <h2 class="section-title">Informes de Mantenimiento</h2>
+                    <div class="maintenance-reports">
+                        <button class="maintenance-report-card" onclick="window.open('https://example.com/revision', '_blank')">
+                            <div class="icon-container"><i class="fas fa-file-alt"></i></div>
+                            <div class="report-details">
+                                <span class="report-title">Revisión Anual del Sistema</span>
+                                <span class="report-date">Fecha: 15-03-2024</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="maintenance-report-card" onclick="window.open('https://example.com/inversor', '_blank')">
+                            <div class="icon-container"><i class="fas fa-file-alt"></i></div>
+                            <div class="report-details">
+                                <span class="report-title">Reemplazo de Inversor</span>
+                                <span class="report-date">Fecha: 20-09-2023</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="maintenance-report-card" onclick="window.open('https://example.com/limpieza', '_blank')">
+                            <div class="icon-container"><i class="fas fa-file-alt"></i></div>
+                            <div class="report-details">
+                                <span class="report-title">Limpieza de Paneles</span>
+                                <span class="report-date">Fecha: 10-03-2023</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Registro de Alertas -->
+                <div class="card">
+                    <h3>Registro de Alertas</h3>
+                    <div class="alert-list">
+                        <div class="alert-item bg-yellow">
+                            <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="alert-details">
+                                <span class="alert-title">Nivel Bajo de Batería</span>
+                                <span class="alert-date">10-05-2024 14:30</span>
+                            </div>
+                            <span class="alert-status">Resuelta</span>
+                        </div>
+                        <div class="alert-item bg-red">
+                            <div class="alert-icon"><i class="fas fa-exclamation-circle"></i></div>
+                            <div class="alert-details">
+                                <span class="alert-title">Sobrecalentamiento del Inversor</span>
+                                <span class="alert-date">22-04-2024 09:15</span>
+                            </div>
+                            <span class="alert-status">Resuelta</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="resumen">
+                <i class="fas fa-chart-pie"></i>
+                <span>Resumen</span>
+            </button>
+            <button class="nav-item" data-target="energia">
+                <i class="fas fa-bolt"></i>
+                <span>Energía</span>
+            </button>
+            <button class="nav-item active" data-target="salud">
+                <i class="fas fa-heartbeat"></i>
+                <span>Salud</span>
+            </button>
+            <button class="nav-item" data-target="cuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+            </button>
+        </nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../script.js"></script>
+    <script>
+    // Chart.js plot for degradation
+    const ctx = document.getElementById('degradationChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+                label: 'Degradación',
+                data: [0, -0.5, -1.2, -0.8, -1.8, -2.0, -2.5],
+                borderColor: '#43A047',
+                backgroundColor: 'rgba(67,160,71,0.08)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 3,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#43A047',
+                pointBorderColor: '#fff',
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: true }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: {
+                        callback: function(value) { return value + '%'; }
+                    }
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html> 

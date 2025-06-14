@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen - Mi Sistema Solar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <div class="solar-panel-section">
+                    <img src="../solar_panels.jpg" alt="Paneles Solares" class="solar-panel-image">
+                    <div class="system-status status-optimus">
+                        Estado del Sistema: Óptimo
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Producción de Energía</h3>
+                    <div class="energy-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-sun"></i>
+                            <div class="stat-details">
+                                <span>Hoy</span>
+                                <span class="highlight">25.4 kWh</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-week"></i>
+                            <div class="stat-details">
+                                <span>Esta Semana</span>
+                                <span class="highlight">178.2 kWh</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="stat-details">
+                                <span>Este Mes</span>
+                                <span class="highlight">752.8 kWh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Balance Energético</h3>
+                    <div class="energy-balance">
+                        <div class="balance-item">
+                            <div class="balance-header">
+                                <span>Producción Solar</span>
+                                <span class="highlight">3.2 kW</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="balance-item">
+                            <div class="balance-header">
+                                <span>Consumo</span>
+                                <span class="highlight">1.8 kW</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div class="balance-item">
+                            <div class="balance-header">
+                                <span>Excedente</span>
+                                <span class="highlight">1.4 kW</span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Estado Actual</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <i class="fas fa-bolt"></i>
+                            <div class="status-details">
+                                <span>Producción Solar</span>
+                                <span class="highlight">3.2 kW</span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-home"></i>
+                            <div class="status-details">
+                                <span>Consumo Actual</span>
+                                <span class="highlight">1.8 kW</span>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-battery-half"></i>
+                            <div class="status-details">
+                                <span>Batería</span>
+                                <span class="highlight">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Salud del Sistema</h3>
+                    <div class="health-item">
+                        <span>Vida Útil Estimada Restante: <span class="highlight">15 años</span></span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: 75%;"></div>
+                        </div>
+                        <small>Aprox. 75% restante</small>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Mantenimiento</h3>
+                    <div class="maintenance-info">
+                        <div class="maintenance-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="maintenance-details">
+                                <span>Última Revisión</span>
+                                <span class="highlight">15/04/2023</span>
+                            </div>
+                        </div>
+                        <div class="maintenance-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="maintenance-details">
+                                <span>Próxima Revisión</span>
+                                <span class="highlight">20/10/2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dato del día -->
+                <div class="card" id="dato-dia-card">
+                    <h3>Dato del día</h3>
+                    <div id="dato-dia-text" class="dato-dia-text" style="font-size: 1.05rem; color: #1976D2; min-height: 48px;"></div>
+                </div>
+
+                <div class="card card-alert">
+                    <h3>Alertas</h3>
+                    <div class="alert-item">
+                        <i class="fas fa-exclamation-circle icon-red"></i>
+                        <div class="alert-details">
+                            <span>Revisar Sistema</span>
+                            <span class="alert-message">Baja Producción de Energía</span>
+                        </div>
+                        <button class="clear-alert-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="resumen">
+                <i class="fas fa-chart-pie"></i>
+                <span>Resumen</span>
+            </button>
+            <button class="nav-item" data-target="energia">
+                <i class="fas fa-bolt"></i>
+                <span>Energía</span>
+            </button>
+            <button class="nav-item" data-target="salud">
+                <i class="fas fa-heartbeat"></i>
+                <span>Salud</span>
+            </button>
+            <button class="nav-item" data-target="cuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+            </button>
+        </nav>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html> 

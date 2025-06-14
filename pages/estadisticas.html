@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Detalladas - Mi Sistema Solar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <h1 class="screen-title">Estadísticas Detalladas</h1>
+
+                <!-- Impacto Ambiental -->
+                <div class="card">
+                    <h3>Impacto Ambiental</h3>
+                    <div class="environmental-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-leaf"></i>
+                            <div class="stat-details">
+                                <span>CO₂ evitado</span>
+                                <span class="highlight">2.4 toneladas</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-tree"></i>
+                            <div class="stat-details">
+                                <span>Equivalente en árboles</span>
+                                <span class="highlight">120 árboles</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:200px; margin-top: 20px;">
+                        <canvas id="environmentalChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Análisis de Costos -->
+                <div class="card">
+                    <h3>Análisis de Costos</h3>
+                    <div class="cost-analysis">
+                        <div class="stat-item">
+                            <i class="fas fa-calculator"></i>
+                            <div class="stat-details">
+                                <span>ROI estimado</span>
+                                <span class="highlight">4.2 años</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="stat-details">
+                                <span>Valor del sistema</span>
+                                <span class="highlight">$4.2M</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:200px; margin-top: 20px;">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Integración con Clima -->
+                <div class="card">
+                    <h3>Integración con Clima</h3>
+                    <div class="weather-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-sun"></i>
+                            <div class="stat-details">
+                                <span>Irradiancia solar</span>
+                                <span class="highlight">5.8 kWh/m²</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-cloud-sun"></i>
+                            <div class="stat-details">
+                                <span>Eficiencia climática</span>
+                                <span class="highlight">92%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:200px; margin-top: 20px;">
+                        <canvas id="weatherChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Características Inteligentes -->
+                <div class="card">
+                    <h3>Características Inteligentes</h3>
+                    <div class="smart-features">
+                        <div class="feature-item">
+                            <i class="fas fa-robot"></i>
+                            <div class="feature-details">
+                                <span>Predicción de consumo</span>
+                                <span class="highlight">Precisión: 94%</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-tools"></i>
+                            <div class="feature-details">
+                                <span>Próximo mantenimiento</span>
+                                <span class="highlight">En 145 días</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <div class="feature-details">
+                                <span>Optimización sugerida</span>
+                                <span class="highlight">Ajuste de inclinación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón de retorno -->
+                <div class="more-stats-button" style="text-align: center; margin: 20px 0;">
+                    <a href="energia.html" class="stats-link" style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                        Volver a Energía
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="resumen">
+                <i class="fas fa-chart-pie"></i>
+                <span>Resumen</span>
+            </button>
+            <button class="nav-item active" data-target="energia">
+                <i class="fas fa-bolt"></i>
+                <span>Energía</span>
+            </button>
+            <button class="nav-item" data-target="salud">
+                <i class="fas fa-heartbeat"></i>
+                <span>Salud</span>
+            </button>
+            <button class="nav-item" data-target="cuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+            </button>
+        </nav>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+        // Gráfico de impacto ambiental
+        const environmentalCtx = document.getElementById('environmentalChart').getContext('2d');
+        new Chart(environmentalCtx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'CO₂ evitado (kg)',
+                    data: [180, 210, 190, 220, 200, 230],
+                    borderColor: '#4CAF50',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'kg CO₂'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de costos
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Año 1', 'Año 2', 'Año 3', 'Año 4', 'Año 5'],
+                datasets: [{
+                    label: 'Ahorro acumulado',
+                    data: [423222, 846444, 1269666, 1692888, 2116110],
+                    backgroundColor: '#4CAF50'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value/1000000).toFixed(1) + 'M';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de clima
+        const weatherCtx = document.getElementById('weatherChart').getContext('2d');
+        new Chart(weatherCtx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Irradiancia solar',
+                    data: [6.2, 6.0, 5.8, 5.5, 5.2, 5.0],
+                    borderColor: '#FFA726',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(255, 167, 38, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'kWh/m²'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modo Técnico - Visitas de Hoy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                    <button onclick="window.history.back()" class="nav-back-btn" style="background: none; border: none; cursor: pointer; font-size: 20px; color: #222;"><i class="fas fa-arrow-left"></i></button>
+                    <h1 class="screen-title" style="flex: 1; text-align: center; margin: 0; font-size: 20px;">Visitas de Hoy</h1>
+                </div>
+                <div class="visit-date" style="color: #4CAF50; font-size: 15px; margin-bottom: 18px;">
+                    <!-- JS will insert today's date here -->
+                </div>
+                <div class="visit-list">
+                    <button class="visit-card" onclick="alert('Abrir detalles de Carlos Ramirez')">
+                        <div class="visit-info">
+                            <div class="visit-name">Carlos Ramirez</div>
+                            <div class="visit-address">Calle del Sol, 123, Ciudad</div>
+                        </div>
+                        <span class="visit-status"></span>
+                    </button>
+                    <button class="visit-card" onclick="alert('Abrir detalles de Sofia Mendoza')">
+                        <div class="visit-info">
+                            <div class="visit-name">Sofia Mendoza</div>
+                            <div class="visit-address">Avenida de la Luna, 456, Pueblo</div>
+                        </div>
+                        <span class="visit-status"></span>
+                    </button>
+                    <button class="visit-card" onclick="alert('Abrir detalles de Ricardo Torres')">
+                        <div class="visit-info">
+                            <div class="visit-name">Ricardo Torres</div>
+                            <div class="visit-address">Plaza de las Estrellas, 789, Villa</div>
+                        </div>
+                        <span class="visit-status"></span>
+                    </button>
+                    <button class="visit-card" onclick="alert('Abrir detalles de Isabel Vargas')">
+                        <div class="visit-info">
+                            <div class="visit-name">Isabel Vargas</div>
+                            <div class="visit-address">Camino del Campo, 101, Aldea</div>
+                        </div>
+                        <span class="visit-status"></span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Set today's date in Spanish
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        const hoy = new Date();
+        const fecha = `${hoy.getDate()} de ${meses[hoy.getMonth()]}, ${hoy.getFullYear()}`;
+        document.querySelector('.visit-date').textContent = fecha;
+    </script>
+</body>
+</html> 

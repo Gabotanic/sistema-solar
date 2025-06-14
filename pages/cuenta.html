@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta - Mi Sistema Solar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <section class="screen active">
+                <h1 class="screen-title">Mi Cuenta</h1>
+                
+                <div class="card">
+                    <h3>Información Personal</h3>
+                    <div class="profile-info">
+                        <div class="profile-item">
+                            <i class="fas fa-user"></i>
+                            <div class="profile-details">
+                                <span>Nombre</span>
+                                <span class="highlight">Juan Pérez</span>
+                            </div>
+                        </div>
+                        <div class="profile-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="profile-details">
+                                <span>Email</span>
+                                <span class="highlight">juan.perez@email.com</span>
+                            </div>
+                        </div>
+                        <div class="profile-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="profile-details">
+                                <span>Teléfono</span>
+                                <span class="highlight">+56 9 1234 5678</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Soporte</h3>
+                    <div class="support-actions">
+                        <button class="action-button">
+                            <i class="fas fa-tools"></i>
+                            <span>Solicitar Mantención</span>
+                        </button>
+                        <button class="action-button">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Reportar un Problema</span>
+                        </button>
+                    </div>
+                    
+                    <h3 class="mt-4">Contactos</h3>
+                    <div class="contact-list">
+                        <a href="https://wa.me/56912345678" class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="tel:+56912345678" class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Llamar</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="action-button mt-4" onclick="window.location.href='modo-tecnico.html'">
+                    <i class="fas fa-cogs"></i>
+                    <span>Modo Técnico</span>
+                </button>
+            </section>
+        </main>
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="resumen">
+                <i class="fas fa-chart-pie"></i>
+                <span>Resumen</span>
+            </button>
+            <button class="nav-item" data-target="energia">
+                <i class="fas fa-bolt"></i>
+                <span>Energía</span>
+            </button>
+            <button class="nav-item" data-target="salud">
+                <i class="fas fa-heartbeat"></i>
+                <span>Salud</span>
+            </button>
+            <button class="nav-item active" data-target="cuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+            </button>
+        </nav>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html> 
