@@ -65,7 +65,7 @@
                         </a>
                     </div>
                 </div>
-                <button class="action-button mt-4" onclick="window.location.href='modo-tecnico.html'">
+                <button class="action-button mt-4" onclick="solicitarCredenciales()">
                     <i class="fas fa-cogs"></i>
                     <span>Modo Técnico</span>
                 </button>
@@ -92,6 +92,25 @@
             </button>
         </nav>
     </div>
+    <script>
+        function solicitarCredenciales() {
+            const usuario = prompt("Ingrese su usuario:");
+            // Si el usuario presiona "Cancelar", prompt devuelve null.
+            if (usuario === null) {
+                return; // El usuario canceló, no hacer nada.
+            }
+
+            const contrasena = prompt("Ingrese su contraseña:");
+            // Si el usuario presiona "Cancelar", prompt devuelve null.
+            if (contrasena === null) {
+                return; // El usuario canceló, no hacer nada.
+            }
+
+            // Como es de prueba, cualquier valor permite continuar.
+            // Redirigir al modo técnico.
+            window.location.href = 'modo-tecnico.html';
+        }
+    </script>
     <script src="../script.js"></script>
 </body>
 </html> 
