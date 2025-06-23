@@ -1,0 +1,551 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* En la parte superior de tu style.css */
+* {
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    overflow-y: auto; /* ¡Añade esto para permitir el scroll en el body si el contenido es más alto! */
+    /* REMUEVE: overflow: hidden; si lo tenías */
+}
+
+/* Contenedor principal de la aplicación (simula un móvil) */
+.app-container {
+    width: 100%;
+    max-width: 400px; /* Ancho máximo para simular un móvil */
+    /* REMUEVE: height: 100vh; */
+    /* REMUEVE: max-height: 800px; */
+    min-height: 100vh; /* ¡Añade esto! Asegura que la app ocupe al menos toda la altura de la ventana en el móvil */
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* REMUEVE: overflow: hidden; */ /* main-content ya maneja su propio scroll */
+    border-radius: 10px;
+    position: relative; /* Para el pseudo-elemento */
+}
+
+/* Pseudo-elemento para el logo transparente de fondo */
+.app-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* ¡Añade esto! Provee el fondo blanco base */
+    background-image: url('mantensolar_logo_notext.png'); /* Ruta a tu logo */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%; /* Si quieres que ocupe todo el espacio */
+    opacity: 0.1; /* Ajusta la transparencia. 0.1 a 0.2 es un buen rango */
+    z-index: 0; /* ¡IMPORTANTE: Cambia esto a 0! */
+    pointer-events: none;
+}
+
+/* Contenido principal que cambia */
+.main-content {
+    flex-grow: 1; /* Esto es clave para que ocupe el espacio flexible */
+    overflow-y: auto; /* Esto es clave para que tenga su propio scroll */
+    padding: 15px;
+    padding-bottom: 85px; /* Mantén o aumenta este valor */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 1;
+}
+
+/* Pantallas (secciones) */
+.screen {
+    display: none; /* Por defecto, todas las pantallas están ocultas */
+}
+
+.screen.active {
+    display: block; /* La pantalla activa se muestra */
+}
+
+/* Títulos de las pantallas */
+.screen-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Sección de la imagen y estado */
+.solar-panel-section {
+    position: relative;
+    width: calc(100% + 30px); /* Ocupa el ancho completo de la app-container, + el padding lateral */
+    margin: -15px -15px 15px -15px; /* Elimina el padding de main-content */
+    height: 200px; /* Altura fija para la imagen */
+    overflow: hidden;
+    border-radius: 10px 10px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+.solar-panel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre el área manteniendo la relación de aspecto */
+    display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+.system-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.system-status.status-optimus {
+    background-color: #4CAF50; /* Verde para óptimo */
+}
+
+/* Estilos de las "tarjetas" (cards) */
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Salud del Sistema */
+.health-item {
+    font-size: 15px;
+    color: #555;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #007bff; /* Azul para resaltar números/fechas */
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 8px;
+    margin: 10px 0 5px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background-color: #28a745; /* Verde para la barra de progreso */
+    height: 100%;
+    border-radius: 5px;
+}
+
+.health-item small {
+    display: block;
+    text-align: right;
+    color: #888;
+    font-size: 12px;
+}
+
+/* Mantenimiento */
+.maintenance-item {
+    display: flex;
+    align-items: flex-start; /* Alinea los íconos con la parte superior del texto */
+    margin-bottom: 15px;
+}
+
+.maintenance-item:last-child {
+    margin-bottom: 0;
+}
+
+.maintenance-item i {
+    font-size: 20px;
+    margin-right: 12px;
+    min-width: 20px; /* Para que los iconos tengan un ancho consistente */
+    text-align: center;
+    line-height: 1; /* Para alinear el ícono con el texto */
+}
+
+.icon-green {
+    color: #28a745; /* Verde para los iconos de mantenimiento */
+}
+
+.item-details span {
+    display: block;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Alertas */
+.card-alert {
+    background-color: #ffebeb; /* Fondo rosado claro para alertas */
+    border: 1px solid #dc3545; /* Borde rojo */
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espacia los elementos */
+    font-size: 15px;
+}
+
+.alert-item i {
+    font-size: 22px;
+    margin-right: 12px;
+}
+
+.icon-red {
+    color: #dc3545; /* Rojo para el icono de alerta */
+}
+
+.alert-message {
+    color: #dc3545; /* Texto de mensaje de alerta en rojo */
+    font-weight: bold;
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+}
+
+.clear-alert-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    transition: color 0.2s ease;
+}
+
+.clear-alert-btn:hover {
+    color: #333;
+}
+
+/* Barra de navegación inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    padding: 10px 0;
+    position: fixed; /* CAMBIO CLAVE: fijo a la ventana del navegador */
+    bottom: 0;
+    left: 0; /* Asegura que empiece desde el borde izquierdo */
+    right: 0; /* Asegura que termine en el borde derecho */
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 100;
+    /* Para que en el escritorio, la barra inferior se ajuste al ancho del app-container */
+    max-width: 400px; /* Debe coincidir con el max-width del .app-container */
+    margin: 0 auto; /* Para centrar la barra en pantallas grandes */
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    padding: 5px 0;
+    cursor: pointer;
+    flex: 1; /* Distribuye el espacio equitativamente */
+    transition: color 0.2s ease;
+}
+
+.nav-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.nav-item.active {
+    color: #007bff; /* Color azul para el ítem activo */
+}
+
+.nav-item:focus {
+    outline: none; /* Elimina el contorno de foco por defecto */
+}
+
+/* Media Queries para pantallas más pequeñas (como móviles reales) */
+@media (max-width: 400px) {
+    .app-container {
+        width: 100vw;
+        min-height: 100vh; /* ¡Cambia esto a min-height! */
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+.page-container {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: 2rem auto;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #1e3a8a;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Section styles */
+section {
+    margin-top: 2rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Grid and card styles */
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.bg-gray-50 {
+    background-color: #f9fafb;
+}
+
+.bg-blue-50 {
+    background-color: #eff6ff;
+}
+
+.bg-green-50 {
+    background-color: #f0fdf4;
+}
+
+.bg-red-100 {
+    background-color: #fee2e2;
+}
+
+.bg-yellow-100 {
+    background-color: #fef3c7;
+}
+
+.bg-sky-100 {
+    background-color: #e0f2fe;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+th {
+    background-color: #f3f4f6;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #1f2937;
+    padding: 0.75rem 1rem;
+}
+
+td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Text styles */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+/* Colors */
+.text-blue-900 {
+    color: #1e3a8a;
+}
+
+.text-green-800 {
+    color: #166534;
+}
+
+.text-green-700 {
+    color: #15803d;
+}
+
+.text-red-700 {
+    color: #b91c1c;
+}
+
+.text-yellow-700 {
+    color: #a16207;
+}
+
+.text-sky-700 {
+    color: #0369a1;
+}
+
+/* Borders and rounded corners */
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.rounded-t-lg {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.border {
+    border: 1px solid #e5e7eb;
+}
+
+.border-2 {
+    border-width: 2px;
+}
+
+.border-dashed {
+    border-style: dashed;
+}
+
+.border-l-4 {
+    border-left-width: 4px;
+}
+
+.border-blue-200 {
+    border-color: #bfdbfe;
+}
+
+.border-green-600 {
+    border-color: #16a34a;
+}
+
+.border-red-500 {
+    border-color: #ef4444;
+}
+
+.border-yellow-500 {
+    border-color: #eab308;
+}
+
+.border-sky-500 {
+    border-color: #0ea5e9;
+}
+
+/* Spacing */
+.p-4 {
+    padding: 1rem;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-8 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+/* Image styles */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Print styles */
+@media print {
+    body {
+        margin: 0;
+        background-color: white;
+    }
+    .page-container {
+        box-shadow: none;
+        margin: 0;
+        padding: 15mm;
+    }
+    .print-hide {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+        background-color: #e0f2fe;
+        color: #0c5460;
+    }
+}
+
+.panel-photo {
+    max-width: 250px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
