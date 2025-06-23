@@ -8,34 +8,40 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         :root {
-            --primary-color: #34d399; /* Un verde más vibrante como en la imagen */
+            --primary-color: #34d399;
             --primary-color-dark: #10b981;
             --light-gray: #f3f4f6;
             --dark-text: #1f2937;
             --medium-text: #4b5563;
+            --ok-color: #34d399;
+            --alert-color: #f59e0b;
+            --fail-color: #ef4444;
+            --ok-bg: #eefcf8;
+            --alert-bg: #fffbeb;
+            --fail-bg: #fff1f2;
         }
 
         body {
-            background-color: var(--light-gray);
+            /* Hereda todo de style.css para consistencia */
         }
 
         .main-content {
-            padding-bottom: 100px; /* Restaurar padding para el botón */
-            position: relative; /* Para contener el botón */
+            padding-bottom: 100px;
+            position: relative;
         }
-
+        
         .form-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 15px;
-            background: var(--light-gray);
-            /* Ya no necesita position relative ni padding-bottom extra */
+            padding: 0;
+            background: transparent;
         }
 
         .form-header {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+            padding: 0 15px;
         }
 
         .form-header .back-button {
@@ -59,8 +65,8 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin: 0 15px 20px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .form-section h2 {
@@ -70,24 +76,57 @@
             margin-bottom: 20px;
         }
 
-        .checkbox-group {
+        .diagnostic-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #e5e7eb;
         }
-        .checkbox-group:last-child {
+        .diagnostic-item:last-child {
             border-bottom: none;
         }
 
-        .checkbox-group label {
+        .diagnostic-item-label {
             color: var(--medium-text);
+            flex-grow: 1;
+            font-size: 15px;
         }
 
-        .checkbox-group input[type="checkbox"] {
-            transform: scale(1.2);
-            accent-color: var(--primary-color);
+        .diagnostic-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .diagnostic-options input[type="radio"] {
+            display: none;
+        }
+
+        .diagnostic-options label {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #9ca3af;
+            background-color: #f3f4f6;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .diagnostic-options input[type="radio"]:checked + .option-ok {
+            background-color: var(--ok-bg);
+            color: var(--ok-color);
+        }
+        .diagnostic-options input[type="radio"]:checked + .option-alert {
+            background-color: var(--alert-bg);
+            color: var(--alert-color);
+        }
+        .diagnostic-options input[type="radio"]:checked + .option-fail {
+            background-color: var(--fail-bg);
+            color: var(--fail-color);
         }
 
         .form-group textarea {
@@ -177,9 +216,8 @@
             left: 0;
             right: 0;
             padding: 20px;
-            background: white;
+            background: transparent;
             z-index: 100;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* Añadir sombra aquí */
         }
 
         .final-button {
@@ -192,6 +230,7 @@
             border: none;
             border-radius: 12px;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4);
         }
         .final-button:hover {
             background-color: var(--primary-color-dark);
@@ -209,32 +248,13 @@
                 </div>
 
                 <form id="mantenimiento-form">
-                    <!-- Diagnóstico General -->
                     <div class="form-section">
                         <h2>Diagnóstico General</h2>
-                        <div class="checkbox-group">
-                            <label for="inspeccion-visual">Inspección visual de los paneles</label>
-                            <input type="checkbox" id="inspeccion-visual" name="inspeccion-visual">
-                        </div>
-                        <div class="checkbox-group">
-                            <label for="verificacion-conexiones">Verificación de las conexiones</label>
-                            <input type="checkbox" id="verificacion-conexiones" name="verificacion-conexiones">
-                        </div>
-                        <div class="checkbox-group">
-                            <label for="prueba-rendimiento">Prueba de rendimiento eléctrico</label>
-                            <input type="checkbox" id="prueba-rendimiento" name="prueba-rendimiento">
-                        </div>
-                        <div class="checkbox-group">
-                            <label for="estado-inversor">Estado del inversor</label>
-                            <input type="checkbox" id="estado-inversor" name="estado-inversor">
-                        </div>
-                        <div class="checkbox-group">
-                            <label for="cableado-conexiones">Cableado y conexiones</label>
-                            <input type="checkbox" id="cableado-conexiones" name="cableado-conexiones">
+                        <div id="diagnostico-container">
+                            <!-- Los items de diagnóstico se insertarán aquí por JS -->
                         </div>
                     </div>
 
-                    <!-- Notas adicionales -->
                     <div class="form-section">
                         <h2>Notas adicionales</h2>
                         <div class="form-group">
@@ -242,7 +262,6 @@
                         </div>
                     </div>
 
-                    <!-- Mediciones Eléctricas -->
                     <div class="form-section">
                         <h2>Mediciones Eléctricas</h2>
                         <div class="measurements-grid">
@@ -281,7 +300,6 @@
                         </div>
                     </div>
 
-                    <!-- Registro Fotográfico -->
                     <div class="form-section">
                         <h2>Registro Fotográfico</h2>
                         <input type="file" id="foto-antes-input" name="foto-antes" accept="image/*" onchange="previewImage(this, 'preview-antes')" hidden>
@@ -293,7 +311,6 @@
                         <div id="preview-despues" class="photo-preview-grid"></div>
                     </div>
 
-                    <!-- Registro Termográfico -->
                     <div class="form-section">
                         <h2>Registro Termográfico</h2>
                         <div class="tabs">
@@ -319,36 +336,76 @@
                         </div>
                     </div>
 
-                    <!-- Hidden fields for other data -->
-                    <input type="hidden" id="cliente-nombre" name="cliente-nombre">
-                    <input type="hidden" id="cliente-direccion" name="cliente-direccion">
-                    <input type="hidden" id="fecha-visita" name="fecha-visita">
-
+                    <!-- Hidden fields for all data -->
+                    <input type="hidden" id="nombre" name="nombre">
+                    <input type="hidden" id="direccion" name="direccion">
+                    <input type="hidden" id="codigoCliente" name="codigoCliente">
+                    <input type="hidden" id="tipoInstalacion" name="tipoInstalacion">
+                    <input type="hidden" id="capacidadInstalada" name="capacidadInstalada">
+                    <input type="hidden" id="cantidadPaneles" name="cantidadPaneles">
+                    <input type="hidden" id="tecnicoResponsable" name="tecnicoResponsable">
+                    <input type="hidden" id="fechaVisita" name="fechaVisita">
+                    <input type="hidden" id="horaVisita" name="horaVisita">
                 </form>
             </div>
+            <div class="final-button-container">
+                <button class="final-button" onclick="generarInforme()">
+                    Finalizar y Generar Informe
+                </button>
+            </div>
         </main>
-        
-        <div class="final-button-container">
-            <button class="final-button" onclick="generarInforme()">
-                Finalizar y Generar Informe
-            </button>
-        </div>
     </div>
 
     <script>
-        // Set client name and date
         const urlParams = new URLSearchParams(window.location.search);
-        const clienteNombre = urlParams.get('cliente') || 'No especificado';
-        const clienteDireccion = urlParams.get('direccion') || 'No especificada';
         
+        // Populate header and hidden fields with client data
+        const clienteNombre = urlParams.get('nombre') || 'No especificado';
         document.getElementById('cliente-nombre-header').textContent = clienteNombre;
-        document.getElementById('cliente-nombre').value = clienteNombre;
-        document.getElementById('cliente-direccion').value = clienteDireccion;
+        document.getElementById('nombre').value = clienteNombre;
+        document.getElementById('direccion').value = urlParams.get('direccion') || '';
+        document.getElementById('codigoCliente').value = urlParams.get('codigoCliente') || '';
+        document.getElementById('tipoInstalacion').value = urlParams.get('tipoInstalacion') || '';
+        document.getElementById('capacidadInstalada').value = urlParams.get('capacidadInstalada') || '';
+        document.getElementById('cantidadPaneles').value = urlParams.get('cantidadPaneles') || '';
+        document.getElementById('tecnicoResponsable').value = urlParams.get('tecnicoResponsable') || '';
         
-        const hoy = new Date();
-        const fechaFormateada = hoy.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-        document.getElementById('fecha-visita').value = fechaFormateada;
+        // Automate date and time
+        const ahora = new Date();
+        const fechaFormateada = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const horaFormateada = ahora.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('fechaVisita').value = fechaFormateada;
+        document.getElementById('horaVisita').value = horaFormateada;
 
+        // --- Generate Diagnostic Items ---
+        const diagnosticoItems = [
+            { id: 'inspeccion-visual', texto: 'Inspección visual de los paneles' },
+            { id: 'verificacion-conexiones', texto: 'Verificación de las conexiones' },
+            { id: 'prueba-rendimiento', texto: 'Prueba de rendimiento eléctrico' },
+            { id: 'estado-inversor', texto: 'Estado del inversor' },
+            { id: 'cableado-conexiones', texto: 'Cableado y conexiones' }
+        ];
+
+        const diagnosticoContainer = document.getElementById('diagnostico-container');
+        diagnosticoItems.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'diagnostic-item';
+            
+            itemDiv.innerHTML = `
+                <span class="diagnostic-item-label">${item.texto}</span>
+                <div class="diagnostic-options">
+                    <input type="radio" id="${item.id}-ok" name="${item.id}-status" value="ok" checked>
+                    <label for="${item.id}-ok" class="diagnostic-option option-ok" title="OK"><i class="fas fa-check"></i></label>
+                    
+                    <input type="radio" id="${item.id}-alert" name="${item.id}-status" value="alert">
+                    <label for="${item.id}-alert" class="diagnostic-option option-alert" title="Alerta"><i class="fas fa-exclamation-triangle"></i></label>
+                    
+                    <input type="radio" id="${item.id}-fail" name="${item.id}-status" value="fail">
+                    <label for="${item.id}-fail" class="diagnostic-option option-fail" title="Falla"><i class="fas fa-times"></i></label>
+                </div>
+            `;
+            diagnosticoContainer.appendChild(itemDiv);
+        });
 
         // Image preview function
         function previewImage(input, previewContainerId) {
@@ -392,8 +449,10 @@
             const datos = {};
 
             for (let [key, value] of formData.entries()) {
-                if (form.elements[key].type === 'checkbox') {
-                    datos[key] = form.elements[key].checked;
+                if (form.elements[key] && form.elements[key].type === 'radio') {
+                    if (form.elements[key].checked) {
+                        datos[key] = value;
+                    }
                 } else if (value instanceof File) {
                     // For files, we will handle them with a FileReader in the next step
                     // For now, we just note that they exist

@@ -19,34 +19,7 @@
                     <!-- JS will insert today's date here -->
                 </div>
                 <div class="visit-list">
-                    <button class="visit-card" onclick="abrirMantenimiento('Carlos Ramirez', 'Calle del Sol, 123, Santiago')">
-                        <div class="visit-info">
-                            <div class="visit-name">Carlos Ramirez</div>
-                            <div class="visit-address">Calle del Sol, 123, Santiago</div>
-                        </div>
-                        <span class="visit-status"></span>
-                    </button>
-                    <button class="visit-card" onclick="abrirMantenimiento('Sofia Mendoza', 'Avenida Lo Solar, 456, TilTil')">
-                        <div class="visit-info">
-                            <div class="visit-name">Sofia Mendoza</div>
-                            <div class="visit-address">Avenida Lo Solar, 456, TilTil</div>
-                        </div>
-                        <span class="visit-status"></span>
-                    </button>
-                    <button class="visit-card" onclick="abrirMantenimiento('Ricardo Torres', 'Camino la Luz, 789, Olmué')">
-                        <div class="visit-info">
-                            <div class="visit-name">Ricardo Torres</div>
-                            <div class="visit-address">Camino la Luz, 789, Olmué</div>
-                        </div>
-                        <span class="visit-status"></span>
-                    </button>
-                    <button class="visit-card" onclick="abrirMantenimiento('Isabel Vargas', 'Los Soles, 101, Tongoy')">
-                        <div class="visit-info">
-                            <div class="visit-name">Isabel Vargas</div>
-                            <div class="visit-address">Los Soles, 101, Tongoy</div>
-                        </div>
-                        <span class="visit-status"></span>
-                    </button>
+                    <!-- Clientes dinámicamente insertados por JavaScript -->
                 </div>
             </section>
         </main>
@@ -58,11 +31,75 @@
         const fecha = `${hoy.getDate()} de ${meses[hoy.getMonth()]}, ${hoy.getFullYear()}`;
         document.querySelector('.visit-date').textContent = fecha;
 
+        const clientes = [
+            {
+                nombre: 'Carlos Ramirez',
+                direccion: 'Calle del Sol, 123, Santiago',
+                codigoCliente: 'CL-001',
+                tipoInstalacion: 'On-Grid',
+                capacidadInstalada: '4.8',
+                cantidadPaneles: '10',
+                tecnicoResponsable: 'Juan Carrasco'
+            },
+            {
+                nombre: 'Sofia Mendoza',
+                direccion: 'Avenida Lo Solar, 456, TilTil',
+                codigoCliente: 'CL-002',
+                tipoInstalacion: 'Off-Grid',
+                capacidadInstalada: '3.5',
+                cantidadPaneles: '8',
+                tecnicoResponsable: 'Ana Flores'
+            },
+            {
+                nombre: 'Ricardo Torres',
+                direccion: 'Camino la Luz, 789, Olmué',
+                codigoCliente: 'CL-003',
+                tipoInstalacion: 'Híbrido',
+                capacidadInstalada: '6.0',
+                cantidadPaneles: '15',
+                tecnicoResponsable: 'Juan Carrasco'
+            },
+            {
+                nombre: 'Isabel Vargas',
+                direccion: 'Los Soles, 101, Tongoy',
+                codigoCliente: 'CL-004',
+                tipoInstalacion: 'On-Grid',
+                capacidadInstalada: '5.5',
+                cantidadPaneles: '12',
+                tecnicoResponsable: 'Ana Flores'
+            }
+        ];
+
         // Función para abrir la página de mantenimiento
-        function abrirMantenimiento(nombre, direccion) {
-            const url = `ingreso-mantenimiento.html?cliente=${encodeURIComponent(nombre)}&direccion=${encodeURIComponent(direccion)}`;
+        function abrirMantenimiento(cliente) {
+            const params = new URLSearchParams(cliente);
+            const url = `ingreso-mantenimiento.html?${params.toString()}`;
             window.location.href = url;
         }
+        
+        // Función para renderizar la lista de clientes
+        function renderizarClientes() {
+            const visitList = document.querySelector('.visit-list');
+            visitList.innerHTML = ''; // Limpiar lista existente
+            clientes.forEach(cliente => {
+                const visitCard = document.createElement('button');
+                visitCard.className = 'visit-card';
+                visitCard.onclick = () => abrirMantenimiento(cliente);
+
+                visitCard.innerHTML = `
+                    <div class="visit-info">
+                        <div class="visit-name">${cliente.nombre}</div>
+                        <div class="visit-address">${cliente.direccion}</div>
+                    </div>
+                    <span class="visit-status"></span>
+                `;
+                visitList.appendChild(visitCard);
+            });
+        }
+        
+        // Renderizar clientes al cargar la página
+        document.addEventListener('DOMContentLoaded', renderizarClientes);
+
     </script>
 </body>
 </html> 

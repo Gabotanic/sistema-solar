@@ -46,6 +46,9 @@
                 color: #0c5460;
             }
         }
+        .status-ok { color: #16a34a; font-weight: bold; }
+        .status-alert { color: #f59e0b; font-weight: bold; }
+        .status-fail { color: #dc2626; font-weight: bold; }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -67,12 +70,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
                     <div>
                         <p><strong>Cliente:</strong> <span id="cliente-nombre">[Nombre del Cliente]</span></p>
-                        <p><strong>Dirección:</strong> <span id="cliente-direccion">[Dirección del Cliente]</span></p>
-                        <p><strong>Tipo de Instalación:</strong> Fotovoltaica</p>
+                        <p><strong>Código N°:</strong> <span id="codigo-cliente">[Código del Cliente]</span></p>
+                        <p><strong>Tipo de Instalación:</strong> <span id="tipo-instalacion">[On-Grid / Off-Grid]</span></p>
+                        <p><strong>Capacidad Instalada:</strong> <span id="capacidad-instalada">[Capacidad en kWp]</span></p>
                     </div>
                     <div>
                         <p><strong>Fecha de Visita:</strong> <span id="fecha-visita">[Fecha de la visita]</span></p>
-                        <p><strong>Técnico Responsable:</strong> MANTENSOLAR</p>
+                        <p><strong>Hora de Visita:</strong> <span id="hora-visita">[Hora de la visita]</span></p>
+                        <p><strong>Cantidad de Paneles:</strong> <span id="cantidad-paneles">[Número de paneles]</span></p>
+                        <p><strong>Técnico Responsable:</strong> <span id="tecnico-responsable">[Nombre del técnico]</span></p>
                     </div>
                 </div>
             </section>
@@ -80,9 +86,17 @@
             <!-- Sección 2: Diagnóstico General -->
             <section class="mt-8">
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">2. Diagnóstico General</h3>
-                <div id="diagnostico-general-container" class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                    <!-- Los resultados del diagnóstico se insertarán aquí -->
-                </div>
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-4 py-3 rounded-l-lg">Componente Evaluado</th>
+                            <th scope="col" class="px-4 py-3 text-center rounded-r-lg">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="diagnostico-general-tbody">
+                        <!-- Filas de diagnóstico se insertarán aquí -->
+                    </tbody>
+                </table>
             </section>
             
             <!-- Sección 3: Mediciones Eléctricas -->
@@ -137,7 +151,7 @@
              <!-- Sección 5: Registro Fotográfico -->
             <section class="mt-8">
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">5. Registro Fotográfico</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                <div class="grid grid-cols-2 gap-4 text-center">
                     <figure>
                         <img id="foto-antes" src="panel_dirty.png" alt="Paneles antes del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
                         <figcaption class="mt-2 text-sm font-semibold text-gray-600">ANTES del Mantenimiento</figcaption>
@@ -191,26 +205,42 @@
             const params = new URLSearchParams(window.location.search);
 
             // Datos Generales
-            document.getElementById('cliente-nombre').textContent = params.get('cliente-nombre') || 'No especificado';
-            document.getElementById('cliente-direccion').textContent = params.get('cliente-direccion') || 'No especificada';
-            document.getElementById('fecha-visita').textContent = params.get('fecha-visita') || 'No especificada';
-
+            document.getElementById('cliente-nombre').textContent = params.get('nombre') || 'No especificado';
+            document.getElementById('codigo-cliente').textContent = params.get('codigoCliente') || '[N/A]';
+            document.getElementById('tipo-instalacion').textContent = params.get('tipoInstalacion') || '[N/A]';
+            document.getElementById('capacidad-instalada').textContent = params.get('capacidadInstalada') ? `${params.get('capacidadInstalada')} kWp` : '[N/A]';
+            document.getElementById('fecha-visita').textContent = params.get('fechaVisita') || 'No especificada';
+            document.getElementById('hora-visita').textContent = params.get('horaVisita') || 'No especificada';
+            document.getElementById('cantidad-paneles').textContent = params.get('cantidadPaneles') || '[N/A]';
+            document.getElementById('tecnico-responsable').textContent = params.get('tecnicoResponsable') || '[N/A]';
+            document.getElementById('codigo-cliente-footer').textContent = params.get('codigoCliente') || '[N/A]';
+            
             // Diagnóstico General
-            const diagnosticoContainer = document.getElementById('diagnostico-general-container');
+            const diagnosticoTbody = document.getElementById('diagnostico-general-tbody');
             const diagnosticoChecks = {
-                'Inspección visual de los paneles': params.get('inspeccion-visual') === 'true',
-                'Verificación de las conexiones': params.get('verificacion-conexiones') === 'true',
-                'Prueba de rendimiento eléctrico': params.get('prueba-rendimiento') === 'true',
-                'Estado del inversor': params.get('estado-inversor') === 'true',
-                'Cableado y conexiones': params.get('cableado-conexiones') === 'true'
+                'Inspección visual de los paneles': params.get('inspeccion-visual-status'),
+                'Verificación de las conexiones': params.get('verificacion-conexiones-status'),
+                'Prueba de rendimiento eléctrico': params.get('prueba-rendimiento-status'),
+                'Estado del inversor': params.get('estado-inversor-status'),
+                'Cableado y conexiones': params.get('cableado-conexiones-status')
+            };
+
+            const statusMap = {
+                ok: '<span class="status-ok">✅ OK</span>',
+                alert: '<span class="status-alert">⚠️ ALERTA</span>',
+                fail: '<span class="status-fail">❌ FALLA</span>'
             };
             
-            let diagnosticoHTML = '<ul class="list-disc list-inside space-y-2">';
             for(const [key, value] of Object.entries(diagnosticoChecks)) {
-                diagnosticoHTML += `<li><strong>${key}:</strong> ${value ? '<span class="text-green-600">OK</span>' : '<span class="text-red-600">Revisar</span>'}</li>`;
+                const row = diagnosticoTbody.insertRow();
+                row.className = 'border-b';
+                const cell1 = row.insertCell();
+                const cell2 = row.insertCell();
+                cell1.className = 'px-4 py-3 font-medium';
+                cell2.className = 'px-4 py-3 text-center';
+                cell1.textContent = key;
+                cell2.innerHTML = statusMap[value] || 'No evaluado';
             }
-            diagnosticoHTML += '</ul>';
-            diagnosticoContainer.innerHTML = diagnosticoHTML;
 
             // Notas Adicionales
             const notas = params.get('notas-adicionales');
