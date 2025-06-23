@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Mantenimiento - MANTENSOLAR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        
+        .form-section h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .photo-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .photo-upload:hover {
+            border-color: #3b82f6;
+        }
+        
+        .photo-upload input[type="file"] {
+            display: none;
+        }
+        
+        .photo-preview {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-ok { background-color: #10b981; }
+        .status-warning { background-color: #f59e0b; }
+        .status-error { background-color: #ef4444; }
+        
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #1e3a8a;
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .header-info {
+            background: #1e40af;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .header-info h2 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+        }
+        
+        .header-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <main class="main-content">
+            <div class="form-container">
+                <!-- Header con información del cliente -->
+                <div class="header-info">
+                    <h2><i class="fas fa-user"></i> Información del Cliente</h2>
+                    <p><strong>Nombre:</strong> <span id="cliente-nombre">Carlos Ramirez</span></p>
+                    <p><strong>Dirección:</strong> <span id="cliente-direccion">Calle del Sol, 123, Santiago</span></p>
+                    <p><strong>Fecha de Visita:</strong> <span id="fecha-visita"></span></p>
+                </div>
+
+                <form id="mantenimiento-form">
+                    <!-- Sección 1: Datos Generales -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-info-circle"></i> 1. Datos Generales del Servicio</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="codigo-cliente">Código N°:</label>
+                                <input type="text" id="codigo-cliente" name="codigo-cliente" placeholder="Ej: CL-001">
+                            </div>
+                            <div class="form-group">
+                                <label for="tipo-instalacion">Tipo de Instalación:</label>
+                                <select id="tipo-instalacion" name="tipo-instalacion">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="On-Grid">On-Grid</option>
+                                    <option value="Off-Grid">Off-Grid</option>
+                                    <option value="Híbrido">Híbrido</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="capacidad-instalada">Capacidad Instalada (kWp):</label>
+                                <input type="number" id="capacidad-instalada" name="capacidad-instalada" step="0.1" placeholder="Ej: 3.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="cantidad-paneles">Cantidad de Paneles:</label>
+                                <input type="number" id="cantidad-paneles" name="cantidad-paneles" placeholder="Ej: 8">
+                            </div>
+                            <div class="form-group">
+                                <label for="hora-visita">Hora de Visita:</label>
+                                <input type="time" id="hora-visita" name="hora-visita">
+                            </div>
+                            <div class="form-group">
+                                <label for="tecnico-responsable">Técnico Responsable:</label>
+                                <input type="text" id="tecnico-responsable" name="tecnico-responsable" placeholder="Nombre del técnico">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2: Inspección General -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-search"></i> 2. Inspección General y Termografía</h3>
+                        
+                        <div class="form-group">
+                            <label>Estado de Componentes:</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="paneles-ok" name="paneles-estado" value="ok">
+                                <label for="paneles-ok"><span class="status-indicator status-ok"></span>Paneles Solares - Limpieza realizada exitosamente</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="estructura-ok" name="estructura-estado" value="ok">
+                                <label for="estructura-ok"><span class="status-indicator status-ok"></span>Estructura de Soporte - Sin deformaciones ni corrosión</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="inversor-ok" name="inversor-estado" value="ok">
+                                <label for="inversor-ok"><span class="status-indicator status-ok"></span>Inversor - Operativo, sin códigos de falla</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="cableado-warning" name="cableado-estado" value="warning">
+                                <label for="cableado-warning"><span class="status-indicator status-warning"></span>Cableado y Conexiones - Punto suelto detectado (Requiere acción)</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="puntos-calientes-ok" name="puntos-calientes-estado" value="ok">
+                                <label for="puntos-calientes-ok"><span class="status-indicator status-ok"></span>Puntos Calientes (Termografía) - No visibles</label>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="temperatura-maxima">Temperatura Máxima (°C):</label>
+                                <input type="number" id="temperatura-maxima" name="temperatura-maxima" step="0.1" placeholder="Ej: 44.8">
+                            </div>
+                            <div class="form-group">
+                                <label for="delta-termico">Delta Térmico entre Módulos (°C):</label>
+                                <input type="number" id="delta-termico" name="delta-termico" step="0.1" placeholder="Ej: 10.3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Mediciones Eléctricas -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-bolt"></i> 3. Mediciones Eléctricas Clave</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="potencia-generada">Potencia Generada (W):</label>
+                                <input type="number" id="potencia-generada" name="potencia-generada" placeholder="Ej: 2635">
+                            </div>
+                            <div class="form-group">
+                                <label for="potencia-referencia">Potencia de Referencia (W):</label>
+                                <input type="number" id="potencia-referencia" name="potencia-referencia" placeholder="Ej: 2750">
+                            </div>
+                            <div class="form-group">
+                                <label for="voltaje-post-limpieza">Voltaje Post-limpieza (V):</label>
+                                <input type="number" id="voltaje-post-limpieza" name="voltaje-post-limpieza" placeholder="Ej: 320">
+                            </div>
+                            <div class="form-group">
+                                <label for="voltaje-nominal">Voltaje Nominal (V):</label>
+                                <input type="number" id="voltaje-nominal" name="voltaje-nominal" placeholder="Ej: 325">
+                            </div>
+                            <div class="form-group">
+                                <label for="resistencia-aislamiento">Resistencia de Aislamiento (MΩ):</label>
+                                <input type="number" id="resistencia-aislamiento" name="resistencia-aislamiento" step="0.1" placeholder="Ej: 45">
+                            </div>
+                            <div class="form-group">
+                                <label for="resistencia-minima">Resistencia Mínima Requerida (MΩ):</label>
+                                <input type="number" id="resistencia-minima" name="resistencia-minima" step="0.1" placeholder="Ej: 1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 4: Rendimiento y Beneficios -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-chart-line"></i> 4. Rendimiento y Beneficios</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="produccion-recuperada">Producción Recuperada (kWh/mes):</label>
+                                <input type="number" id="produccion-recuperada" name="produccion-recuperada" step="0.1" placeholder="Ej: 45">
+                            </div>
+                            <div class="form-group">
+                                <label for="aumento-rendimiento">Aumento de Rendimiento (%):</label>
+                                <input type="number" id="aumento-rendimiento" name="aumento-rendimiento" step="0.1" placeholder="Ej: 8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 5: Registro Fotográfico -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-camera"></i> 5. Registro Fotográfico</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Foto ANTES del Mantenimiento:</label>
+                                <div class="photo-upload" onclick="document.getElementById('foto-antes').click()">
+                                    <i class="fas fa-upload" style="font-size: 24px; color: #6b7280;"></i>
+                                    <p>Haz clic para subir foto</p>
+                                    <input type="file" id="foto-antes" name="foto-antes" accept="image/*" onchange="previewImage(this, 'preview-antes')">
+                                    <img id="preview-antes" class="photo-preview" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Foto DESPUÉS del Mantenimiento:</label>
+                                <div class="photo-upload" onclick="document.getElementById('foto-despues').click()">
+                                    <i class="fas fa-upload" style="font-size: 24px; color: #6b7280;"></i>
+                                    <p>Haz clic para subir foto</p>
+                                    <input type="file" id="foto-despues" name="foto-despues" accept="image/*" onchange="previewImage(this, 'preview-despues')">
+                                    <img id="preview-despues" class="photo-preview" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 6: Observaciones y Recomendaciones -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-comments"></i> 6. Observaciones y Recomendaciones</h3>
+                        <div class="form-group">
+                            <label for="observaciones">Observaciones Generales:</label>
+                            <textarea id="observaciones" name="observaciones" placeholder="Describe los hallazgos principales, problemas detectados, acciones realizadas..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recomendaciones">Recomendaciones:</label>
+                            <textarea id="recomendaciones" name="recomendaciones" placeholder="Lista de recomendaciones para el cliente..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="proxima-visita">Próxima Visita Recomendada:</label>
+                            <input type="date" id="proxima-visita" name="proxima-visita">
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button type="button" class="btn-secondary" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </button>
+                        <button type="button" class="btn-primary" onclick="guardarDatos()">
+                            <i class="fas fa-save"></i> Guardar Datos
+                        </button>
+                        <button type="button" class="btn-primary" onclick="generarInforme()" style="background: #059669;">
+                            <i class="fas fa-file-pdf"></i> Generar Informe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Establecer fecha actual
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        document.getElementById('fecha-visita').textContent = fechaFormateada;
+
+        // Obtener parámetros de la URL para mostrar información del cliente
+        const urlParams = new URLSearchParams(window.location.search);
+        const clienteNombre = urlParams.get('cliente') || 'Carlos Ramirez';
+        const clienteDireccion = urlParams.get('direccion') || 'Calle del Sol, 123, Santiago';
+        
+        document.getElementById('cliente-nombre').textContent = clienteNombre;
+        document.getElementById('cliente-direccion').textContent = clienteDireccion;
+
+        // Función para previsualizar imágenes
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Función para guardar datos
+        function guardarDatos() {
+            const formData = new FormData(document.getElementById('mantenimiento-form'));
+            const datos = {};
+            
+            // Convertir FormData a objeto
+            for (let [key, value] of formData.entries()) {
+                datos[key] = value;
+            }
+            
+            // Agregar información del cliente
+            datos.cliente = clienteNombre;
+            datos.direccion = clienteDireccion;
+            datos.fechaVisita = fechaFormateada;
+            
+            // Guardar en localStorage (en una aplicación real, esto se enviaría a un servidor)
+            localStorage.setItem('datosMantenimiento_' + Date.now(), JSON.stringify(datos));
+            
+            alert('Datos guardados exitosamente');
+        }
+
+        // Función para generar informe
+        function generarInforme() {
+            // Primero guardar los datos
+            guardarDatos();
+            
+            // Redirigir al informe con los datos
+            const datos = obtenerDatosFormulario();
+            const queryString = new URLSearchParams(datos).toString();
+            window.open(`../informe/codigo_informe.html?${queryString}`, '_blank');
+        }
+
+        // Función para obtener todos los datos del formulario
+        function obtenerDatosFormulario() {
+            const formData = new FormData(document.getElementById('mantenimiento-form'));
+            const datos = {};
+            
+            for (let [key, value] of formData.entries()) {
+                datos[key] = value;
+            }
+            
+            // Agregar información adicional
+            datos.cliente = clienteNombre;
+            datos.direccion = clienteDireccion;
+            datos.fechaVisita = fechaFormateada;
+            
+            return datos;
+        }
+    </script>
+</body>
+</html> 

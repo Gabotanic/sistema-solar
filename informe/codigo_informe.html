@@ -66,16 +66,16 @@
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">1. Datos Generales del Servicio</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
                     <div>
-                        <p><strong>Cliente:</strong> [Nombre del Cliente]</p>
-                        <p><strong>Código N°:</strong> [Código del Cliente]</p>
-                        <p><strong>Tipo de Instalación:</strong> [On-Grid / Off-Grid]</p>
-                        <p><strong>Capacidad Instalada:</strong> [Capacidad en kWp]</p>
+                        <p><strong>Cliente:</strong> <span id="cliente-nombre">[Nombre del Cliente]</span></p>
+                        <p><strong>Código N°:</strong> <span id="codigo-cliente">[Código del Cliente]</span></p>
+                        <p><strong>Tipo de Instalación:</strong> <span id="tipo-instalacion">[On-Grid / Off-Grid]</span></p>
+                        <p><strong>Capacidad Instalada:</strong> <span id="capacidad-instalada">[Capacidad en kWp]</span></p>
                     </div>
                     <div>
-                        <p><strong>Fecha de Visita:</strong> [Fecha de la visita]</p>
-                        <p><strong>Hora de Visita:</strong> [Hora de la visita]</p>
-                        <p><strong>Cantidad de Paneles:</strong> [Número de paneles]</p>
-                        <p><strong>Técnico Responsable:</strong> [Nombre del técnico]</p>
+                        <p><strong>Fecha de Visita:</strong> <span id="fecha-visita">[Fecha de la visita]</span></p>
+                        <p><strong>Hora de Visita:</strong> <span id="hora-visita">[Hora de la visita]</span></p>
+                        <p><strong>Cantidad de Paneles:</strong> <span id="cantidad-paneles">[Número de paneles]</span></p>
+                        <p><strong>Técnico Responsable:</strong> <span id="tecnico-responsable">[Nombre del técnico]</span></p>
                     </div>
                 </div>
             </section>
@@ -85,10 +85,10 @@
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">2. Resumen Ejecutivo</h3>
                 <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg">
                     <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Estado General del Sistema:</strong> Operativo con una recomendación crítica de seguridad.</li>
-                        <li><strong>Eficiencia Actual (Post-mantenimiento):</strong> Mejora notable tras limpieza.</li>
-                        <li><strong>Principales Hallazgos:</strong> Se corrigió una pérdida del 6.5% por suciedad y se detectó un cableado suelto.</li>
-                        <li class="font-semibold"><strong>Recomendación Principal:</strong> Es fundamental fijar el cableado suelto para garantizar la seguridad y el rendimiento óptimo del sistema.</li>
+                        <li><strong>Estado General del Sistema:</strong> <span id="estado-general">Operativo con una recomendación crítica de seguridad.</span></li>
+                        <li><strong>Eficiencia Actual (Post-mantenimiento):</strong> <span id="eficiencia-actual">Mejora notable tras limpieza.</span></li>
+                        <li><strong>Principales Hallazgos:</strong> <span id="hallazgos-principales">Se corrigió una pérdida del 6.5% por suciedad y se detectó un cableado suelto.</span></li>
+                        <li class="font-semibold"><strong>Recomendación Principal:</strong> <span id="recomendacion-principal">Es fundamental fijar el cableado suelto para garantizar la seguridad y el rendimiento óptimo del sistema.</span></li>
                     </ul>
                 </div>
             </section>
@@ -107,13 +107,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Paneles Solares</td><td class="px-4 py-3">Limpieza realizada exitosamente.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Estructura de Soporte</td><td class="px-4 py-3">Sin deformaciones ni corrosión.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Inversor</td><td class="px-4 py-3">Operativo, sin códigos de falla.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Cableado y Conexiones</td><td class="px-4 py-3">Punto suelto detectado (Requiere acción).</td><td class="px-4 py-3 text-center text-red-500 text-xl"><img src="warning_icon.svg" alt="Advertencia" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Puntos Calientes (Termografía)</td><td class="px-4 py-3">No visibles.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr class="border-b"><td class="px-4 py-3 font-medium">Temperatura Máxima</td><td class="px-4 py-3">44.8°C (Normal).</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
-                        <tr><td class="px-4 py-3 font-medium">Delta Térmico entre Módulos</td><td class="px-4 py-3">10.3°C (Aceptable).</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Paneles Solares</td><td class="px-4 py-3" id="paneles-resultado">Limpieza realizada exitosamente.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Estructura de Soporte</td><td class="px-4 py-3" id="estructura-resultado">Sin deformaciones ni corrosión.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Inversor</td><td class="px-4 py-3" id="inversor-resultado">Operativo, sin códigos de falla.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Cableado y Conexiones</td><td class="px-4 py-3" id="cableado-resultado">Punto suelto detectado (Requiere acción).</td><td class="px-4 py-3 text-center text-red-500 text-xl"><img src="warning_icon.svg" alt="Advertencia" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Puntos Calientes (Termografía)</td><td class="px-4 py-3" id="puntos-calientes-resultado">No visibles.</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-3 font-medium">Temperatura Máxima</td><td class="px-4 py-3" id="temperatura-maxima-resultado">44.8°C (Normal).</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
+                        <tr><td class="px-4 py-3 font-medium">Delta Térmico entre Módulos</td><td class="px-4 py-3" id="delta-termico-resultado">10.3°C (Aceptable).</td><td class="px-4 py-3 text-center text-green-500 text-xl"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline;"></td></tr>
                     </tbody>
                 </table>
 
@@ -131,20 +131,20 @@
                         <tbody>
                             <tr class="border-b">
                                 <td class="px-4 py-3 font-medium">Potencia Generada</td>
-                                <td class="px-4 py-3">2635 W</td>
-                                <td class="px-4 py-3">~2750 W</td>
+                                <td class="px-4 py-3" id="potencia-generada-medicion">2635 W</td>
+                                <td class="px-4 py-3" id="potencia-referencia-valor">~2750 W</td>
                                 <td class="px-4 py-3 text-green-600 font-semibold">Óptimo</td>
                             </tr>
                             <tr class="border-b">
                                 <td class="px-4 py-3 font-medium">Voltaje (Post-limpieza)</td>
-                                <td class="px-4 py-3">320 V</td>
-                                <td class="px-4 py-3">325 V (Nominal)</td>
+                                <td class="px-4 py-3" id="voltaje-post-limpieza-medicion">320 V</td>
+                                <td class="px-4 py-3" id="voltaje-nominal-valor">325 V (Nominal)</td>
                                 <td class="px-4 py-3 text-green-600 font-semibold">Óptimo</td>
                             </tr>
                             <tr>
                                 <td class="px-4 py-3 font-medium">Resistencia de Aislamiento</td>
-                                <td class="px-4 py-3">45 MΩ</td>
-                                <td class="px-4 py-3">&gt; 1 MΩ</td>
+                                <td class="px-4 py-3" id="resistencia-aislamiento-medicion">45 MΩ</td>
+                                <td class="px-4 py-3" id="resistencia-minima-valor">&gt; 1 MΩ</td>
                                 <td class="px-4 py-3 text-green-600 font-semibold">Seguro</td>
                             </tr>
                         </tbody>
@@ -157,8 +157,8 @@
                  <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">4. Rendimiento y Beneficios</h3>
                 <div class="bg-green-50 border-2 border-dashed border-green-600 p-6 rounded-lg text-center">
                     <h4 class="text-lg font-bold text-green-800"><img src="check_icon.svg" alt="OK" style="height: 1.5em; display: inline; vertical-align: middle;"> Aumento de Rendimiento Post-Mantenimiento</h4>
-                    <p class="text-green-700 mt-2">La limpieza de paneles recuperó una producción estimada de <strong>45 kWh/mes</strong>. Esto se traduce en un aumento del rendimiento de su sistema de aproximadamente:</p>
-                    <p class="text-4xl font-bold text-green-800 mt-2">8%</p>
+                    <p class="text-green-700 mt-2">La limpieza de paneles recuperó una producción estimada de <strong><span id="produccion-recuperada-texto">45 kWh/mes</span></strong>. Esto se traduce en un aumento del rendimiento de su sistema de aproximadamente:</p>
+                    <p class="text-4xl font-bold text-green-800 mt-2"><span id="aumento-rendimiento-texto">8%</span></p>
                 </div>
             </section>
 
@@ -168,15 +168,15 @@
                 <div class="space-y-3">
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg flex items-center">
                         <span class="text-2xl mr-4"><img src="warning_icon.svg" alt="Acción Inmediata" style="height: 1.5em; display: inline; vertical-align: middle;"></span>
-                        <div><strong>Acción Inmediata:</strong> Fijar el cableado suelto detectado para prevenir riesgos y asegurar la estabilidad del sistema.</div>
+                        <div><strong>Acción Inmediata:</strong> <span id="accion-inmediata">Fijar el cableado suelto detectado para prevenir riesgos y asegurar la estabilidad del sistema.</span></div>
                     </div>
                     <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg flex items-center">
                         <span class="text-2xl mr-4"><img src="calendar_icon.svg" alt="Acción Preventiva" style="height: 1.5em; display: inline; vertical-align: middle;"></span>
-                        <div><strong>Acción Preventiva:</strong> Agendar próxima limpieza en 3-6 meses para mantener la máxima eficiencia.</div>
+                        <div><strong>Acción Preventiva:</strong> <span id="accion-preventiva">Agendar próxima limpieza en 3-6 meses para mantener la máxima eficiencia.</span></div>
                     </div>
                      <div class="bg-sky-100 border-l-4 border-sky-500 text-sky-700 p-4 rounded-r-lg flex items-center">
                         <span class="text-2xl mr-4"><img src="lightbulb_icon.svg" alt="Oportunidad de Mejora" style="height: 1.5em; display: inline; vertical-align: middle;"></span>
-                        <div><strong>Oportunidad de Mejora:</strong> Considerar monitoreo digital para seguimiento continuo del rendimiento.</div>
+                        <div><strong>Oportunidad de Mejora:</strong> <span id="oportunidad-mejora">Considerar monitoreo digital para seguimiento continuo del rendimiento.</span></div>
                     </div>
                 </div>
             </section>
@@ -186,11 +186,11 @@
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">6. Registro Fotográfico</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
                     <figure>
-                        <img src="panel_dirty.png" alt="Paneles solares sucios antes del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
+                        <img id="foto-antes" src="panel_dirty.png" alt="Paneles solares sucios antes del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
                         <figcaption class="mt-2 text-sm font-semibold text-gray-600">ANTES del Mantenimiento</figcaption>
                     </figure>
                     <figure>
-                        <img src="panel_clean.png" alt="Paneles solares limpios después del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
+                        <img id="foto-despues" src="panel_clean.png" alt="Paneles solares limpios después del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
                         <figcaption class="mt-2 text-sm font-semibold text-gray-600">DESPUÉS del Mantenimiento</figcaption>
                     </figure>
                 </div>
@@ -210,10 +210,80 @@
                     <p class="ml-4">Accede a tu historial y<br>beneficios desde la app.</p>
                 </div>
             </div>
-            <p class="mt-4 text-xs text-gray-400">Informe generado para [Código del Cliente] - Página 1 de 1</p>
+            <p class="mt-4 text-xs text-gray-400">Informe generado para <span id="codigo-cliente-footer">[Código del Cliente]</span> - Página 1 de 1</p>
         </footer>
 
     </div>
 
+    <script>
+        // Función para obtener parámetros de la URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Función para llenar los datos del informe
+        function llenarDatosInforme() {
+            // Datos generales
+            document.getElementById('cliente-nombre').textContent = getUrlParameter('cliente') || '[Nombre del Cliente]';
+            document.getElementById('codigo-cliente').textContent = getUrlParameter('codigo-cliente') || '[Código del Cliente]';
+            document.getElementById('tipo-instalacion').textContent = getUrlParameter('tipo-instalacion') || '[On-Grid / Off-Grid]';
+            document.getElementById('capacidad-instalada').textContent = (getUrlParameter('capacidad-instalada') || '[Capacidad en kWp]') + ' kWp';
+            document.getElementById('fecha-visita').textContent = getUrlParameter('fechaVisita') || '[Fecha de la visita]';
+            document.getElementById('hora-visita').textContent = getUrlParameter('hora-visita') || '[Hora de la visita]';
+            document.getElementById('cantidad-paneles').textContent = getUrlParameter('cantidad-paneles') || '[Número de paneles]';
+            document.getElementById('tecnico-responsable').textContent = getUrlParameter('tecnico-responsable') || '[Nombre del técnico]';
+
+            // Mediciones eléctricas
+            const potenciaGenerada = getUrlParameter('potencia-generada');
+            const potenciaReferencia = getUrlParameter('potencia-referencia');
+            const voltajePostLimpieza = getUrlParameter('voltaje-post-limpieza');
+            const voltajeNominal = getUrlParameter('voltaje-nominal');
+            const resistenciaAislamiento = getUrlParameter('resistencia-aislamiento');
+            const resistenciaMinima = getUrlParameter('resistencia-minima');
+
+            if (potenciaGenerada) document.getElementById('potencia-generada-medicion').textContent = potenciaGenerada + ' W';
+            if (potenciaReferencia) document.getElementById('potencia-referencia-valor').textContent = '~' + potenciaReferencia + ' W';
+            if (voltajePostLimpieza) document.getElementById('voltaje-post-limpieza-medicion').textContent = voltajePostLimpieza + ' V';
+            if (voltajeNominal) document.getElementById('voltaje-nominal-valor').textContent = voltajeNominal + ' V (Nominal)';
+            if (resistenciaAislamiento) document.getElementById('resistencia-aislamiento-medicion').textContent = resistenciaAislamiento + ' MΩ';
+            if (resistenciaMinima) document.getElementById('resistencia-minima-valor').textContent = '> ' + resistenciaMinima + ' MΩ';
+
+            // Temperaturas
+            const temperaturaMaxima = getUrlParameter('temperatura-maxima');
+            const deltaTermico = getUrlParameter('delta-termico');
+            
+            if (temperaturaMaxima) document.getElementById('temperatura-maxima-resultado').textContent = temperaturaMaxima + '°C (Normal).';
+            if (deltaTermico) document.getElementById('delta-termico-resultado').textContent = deltaTermico + '°C (Aceptable).';
+
+            // Rendimiento
+            const produccionRecuperada = getUrlParameter('produccion-recuperada');
+            const aumentoRendimiento = getUrlParameter('aumento-rendimiento');
+            
+            if (produccionRecuperada) document.getElementById('produccion-recuperada-texto').textContent = produccionRecuperada + ' kWh/mes';
+            if (aumentoRendimiento) document.getElementById('aumento-rendimiento-texto').textContent = aumentoRendimiento + '%';
+
+            // Observaciones y recomendaciones
+            const observaciones = getUrlParameter('observaciones');
+            const recomendaciones = getUrlParameter('recomendaciones');
+            
+            if (observaciones) {
+                document.getElementById('hallazgos-principales').textContent = observaciones;
+            }
+            if (recomendaciones) {
+                document.getElementById('recomendacion-principal').textContent = recomendaciones;
+            }
+
+            // Footer
+            document.getElementById('codigo-cliente-footer').textContent = getUrlParameter('codigo-cliente') || '[Código del Cliente]';
+        }
+
+        // Ejecutar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            llenarDatosInforme();
+        });
+    </script>
 </body>
 </html>

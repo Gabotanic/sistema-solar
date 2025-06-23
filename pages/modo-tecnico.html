@@ -19,31 +19,31 @@
                     <!-- JS will insert today's date here -->
                 </div>
                 <div class="visit-list">
-                    <button class="visit-card" onclick="alert('Abrir detalles de Carlos Ramirez')">
+                    <button class="visit-card" onclick="abrirMantenimiento('Carlos Ramirez', 'Calle del Sol, 123, Santiago')">
                         <div class="visit-info">
                             <div class="visit-name">Carlos Ramirez</div>
-                            <div class="visit-address">Calle del Sol, 123, Ciudad</div>
+                            <div class="visit-address">Calle del Sol, 123, Santiago</div>
                         </div>
                         <span class="visit-status"></span>
                     </button>
-                    <button class="visit-card" onclick="alert('Abrir detalles de Sofia Mendoza')">
+                    <button class="visit-card" onclick="abrirMantenimiento('Sofia Mendoza', 'Avenida Lo Solar, 456, TilTil')">
                         <div class="visit-info">
                             <div class="visit-name">Sofia Mendoza</div>
-                            <div class="visit-address">Avenida de la Luna, 456, Pueblo</div>
+                            <div class="visit-address">Avenida Lo Solar, 456, TilTil</div>
                         </div>
                         <span class="visit-status"></span>
                     </button>
-                    <button class="visit-card" onclick="alert('Abrir detalles de Ricardo Torres')">
+                    <button class="visit-card" onclick="abrirMantenimiento('Ricardo Torres', 'Camino la Luz, 789, Olmué')">
                         <div class="visit-info">
                             <div class="visit-name">Ricardo Torres</div>
-                            <div class="visit-address">Plaza de las Estrellas, 789, Villa</div>
+                            <div class="visit-address">Camino la Luz, 789, Olmué</div>
                         </div>
                         <span class="visit-status"></span>
                     </button>
-                    <button class="visit-card" onclick="alert('Abrir detalles de Isabel Vargas')">
+                    <button class="visit-card" onclick="abrirMantenimiento('Isabel Vargas', 'Los Soles, 101, Tongoy')">
                         <div class="visit-info">
                             <div class="visit-name">Isabel Vargas</div>
-                            <div class="visit-address">Camino del Campo, 101, Aldea</div>
+                            <div class="visit-address">Los Soles, 101, Tongoy</div>
                         </div>
                         <span class="visit-status"></span>
                     </button>
@@ -57,6 +57,12 @@
         const hoy = new Date();
         const fecha = `${hoy.getDate()} de ${meses[hoy.getMonth()]}, ${hoy.getFullYear()}`;
         document.querySelector('.visit-date').textContent = fecha;
+
+        // Función para abrir la página de mantenimiento
+        function abrirMantenimiento(nombre, direccion) {
+            const url = `ingreso-mantenimiento.html?cliente=${encodeURIComponent(nombre)}&direccion=${encodeURIComponent(direccion)}`;
+            window.location.href = url;
+        }
     </script>
 </body>
 </html> 
