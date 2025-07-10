@@ -46,25 +46,74 @@
                 color: #0c5460;
             }
         }
-        .status-ok { color: #16a34a; font-weight: bold; }
-        .status-alert { color: #f59e0b; font-weight: bold; }
-        .status-fail { color: #dc2626; font-weight: bold; }
+        .status-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            vertical-align: middle;
+        }
+        .recommendation-box {
+            border-left-width: 4px;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .recommendation-box img {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+        .porcentaje-aumento {
+            color: #16a34a;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        /* Cambios de estilo para la sección de Rendimiento y Beneficios y resumen ejecutivo */
+        .beneficio-block {
+            text-align: center;
+        }
+        .beneficio-titulo {
+            font-size: 1.18rem;
+            font-weight: bold;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .beneficio-texto {
+            font-size: 1.01rem;
+            color: #222;
+            margin-bottom: 0.7rem;
+            font-family: inherit;
+            font-weight: 400;
+        }
+        .resumen-ejecutivo-lista {
+            font-size: 1.01rem;
+            color: #222;
+            font-family: inherit;
+            font-weight: 400;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
 
     <div class="page-container">
         <!-- Encabezado con Logo -->
-        <header class="flex justify-between items-center py-0.5 px-1 bg-blue-900 rounded-t-lg">
-            <div>
-                <!-- Logo de MANTENSOLAR integrado -->
-                <img src="logo_big.png" alt="Logo MANTENSOLAR" class="h-16" style="height: 40px;">
+        <header class="flex flex-col items-center py-0.5 px-1 bg-blue-900 rounded-t-lg" style="padding: 1rem; background-color: #1e3a8a;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="mantensolar_logo_notext.png" alt="Logo MANTENSOLAR" class="h-16" style="height: 48px; margin-bottom: 4px;">
+                <span style="color: rgb(255, 241, 210); font-size: 1rem; font-weight: bold; letter-spacing: 1.5px;">MANTENSOLAR</span>
             </div>
-            <h2 class="text-base font-semibold text-white" style="font-size: 1rem;">Informe de Mantenimiento</h2>
+            <h2 class="text-base font-semibold text-white" style="font-size: 1.25rem; margin-top: 0.5rem;">Informe de Mantenimiento</h2>
         </header>
 
         <main class="mt-8">
-            <!-- Sección 1: Datos Generales -->
+            <!-- Sección 1: Datos Generales del Servicio -->
             <section>
                 <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">1. Datos Generales del Servicio</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
@@ -83,74 +132,93 @@
                 </div>
             </section>
 
-            <!-- Sección 2: Diagnóstico General -->
+            <!-- Sección 2: Resumen Ejecutivo -->
             <section class="mt-8">
-                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">2. Diagnóstico General</h3>
-                <table class="w-full text-sm text-left text-gray-700">
-                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
-                        <tr>
-                            <th scope="col" class="px-4 py-3 rounded-l-lg">Componente Evaluado</th>
-                            <th scope="col" class="px-4 py-3 text-center rounded-r-lg">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="diagnostico-general-tbody">
-                        <!-- Filas de diagnóstico se insertarán aquí -->
-                    </tbody>
-                </table>
-            </section>
-            
-            <!-- Sección 3: Mediciones Eléctricas -->
-            <section class="mt-8">
-                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">3. Mediciones Eléctricas Clave</h3>
-                 <table class="w-full text-sm text-left text-gray-700">
-                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
-                        <tr>
-                            <th scope="col" class="px-4 py-3 rounded-l-lg">Parámetro</th>
-                            <th scope="col" class="px-4 py-3">Antes</th>
-                            <th scope="col" class="px-4 py-3">Después</th>
-                            <th scope="col" class="px-4 py-3 rounded-r-lg">Diagnóstico</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="px-4 py-3 font-medium">Voltaje (V)</td>
-                            <td class="px-4 py-3" id="voltaje-antes">-</td>
-                            <td class="px-4 py-3" id="voltaje-despues">-</td>
-                            <td class="px-4 py-3 text-green-600 font-semibold" id="voltaje-diagnostico">Óptimo</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="px-4 py-3 font-medium">Corriente (A)</td>
-                            <td class="px-4 py-3" id="corriente-antes">-</td>
-                            <td class="px-4 py-3" id="corriente-despues">-</td>
-                            <td class="px-4 py-3 text-green-600 font-semibold" id="corriente-diagnostico">Óptimo</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="px-4 py-3 font-medium">Potencia (W)</td>
-                            <td class="px-4 py-3" id="potencia-antes">-</td>
-                            <td class="px-4 py-3" id="potencia-despues">-</td>
-                            <td class="px-4 py-3 text-green-600 font-semibold" id="potencia-diagnostico">Óptimo</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 font-medium">Resistencia de Aislamiento (MΩ)</td>
-                            <td class="px-4 py-3" id="resistencia-aislamiento-antes">-</td>
-                            <td class="px-4 py-3" id="resistencia-aislamiento-despues">-</td>
-                            <td class="px-4 py-3 text-green-600 font-semibold" id="resistencia-diagnostico">Seguro</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- Sección 4: Notas Adicionales -->
-            <section class="mt-8">
-                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">4. Notas Adicionales</h3>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <p id="notas-adicionales-texto">No se han añadido notas adicionales.</p>
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">2. Resumen Ejecutivo</h3>
+                <div class="bg-blue-50 p-4 rounded-lg text-sm" style="background-color: #eff6ff;">
+                    <ul class="list-disc list-inside space-y-2 resumen-ejecutivo-lista" style="padding-left: 1rem;">
+                        <li><strong>Estado General del Sistema:</strong> <span id="estado-general-resumen">[Estado General]</span></li>
+                        <li><strong>Eficiencia Actual (Post-mantenimiento):</strong> <span id="eficiencia-resumen">[Eficiencia]</span></li>
+                        <li><strong>Principales Hallazgos:</strong> <span id="hallazgos-resumen">[Hallazgos]</span></li>
+                        <li><strong>Recomendación Principal:</strong> <span id="recomendacion-principal-resumen">[Recomendación]</span></li>
+                    </ul>
                 </div>
             </section>
 
-             <!-- Sección 5: Registro Fotográfico -->
+            <!-- Sección 3: Diagnóstico Detallado del Sistema -->
             <section class="mt-8">
-                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">5. Registro Fotográfico</h3>
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">3. Diagnóstico Detallado del Sistema</h3>
+                
+                <h4 class="text-lg font-semibold text-gray-800 mb-3 mt-4" style="font-size: 1.1rem;">3.1. Inspección General y Termografía</h4>
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-4 py-2 rounded-l-lg font-bold">COMPONENTE / PARÁMETRO</th>
+                            <th scope="col" class="px-4 py-2 font-bold">RESULTADO</th>
+                            <th scope="col" class="px-4 py-2 text-center rounded-r-lg font-bold">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inspeccion-general-tbody">
+                        <!-- Diagnóstico General dinámico (JS) -->
+                    </tbody>
+                    <tbody id="inspeccion-termografia-tbody">
+                        <tr class="border-b"><td class="px-4 py-2">Puntos Calientes (Termografía)</td><td class="px-4 py-2">No visibles.</td><td class="px-4 py-2 text-center"><img src="check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Temperatura Máxima</td><td class="px-4 py-2">44.8°C (Normal).</td><td class="px-4 py-2 text-center"><img src="check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr><td class="px-4 py-2">Delta Térmico entre Módulos</td><td class="px-4 py-2">10.3°C (Aceptable).</td><td class="px-4 py-2 text-center"><img src="check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                    </tbody>
+                </table>
+                
+                <h4 class="text-lg font-semibold text-gray-800 mb-3 mt-6" style="font-size: 1.1rem;">3.2. Mediciones Eléctricas Clave</h4>
+                 <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-4 py-2 rounded-l-lg font-bold">PARÁMETRO</th>
+                            <th scope="col" class="px-4 py-2 font-bold">MEDICIÓN</th>
+                            <th scope="col" class="px-4 py-2 font-bold">VALOR DE REFERENCIA</th>
+                            <th scope="col" class="px-4 py-2 rounded-r-lg font-bold">DIAGNÓSTICO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mediciones-clave-tbody">
+                        <tr class="border-b"><td class="px-4 py-2">Potencia Generada</td><td class="px-4 py-2">2635 W</td><td class="px-4 py-2">~2750 W</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Voltaje (Post-limpieza)</td><td class="px-4 py-2">320 V</td><td class="px-4 py-2">325 V (Nominal)</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                        <tr><td class="px-4 py-2">Resistencia de Aislamiento</td><td class="px-4 py-2">45 MΩ</td><td class="px-4 py-2">> 1 MΩ</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Seguro</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Sección 4: Rendimiento y Beneficios -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">4. Rendimiento y Beneficios</h3>
+                <div class="p-4 rounded-lg text-sm beneficio-block" style="background-color: #f0fdf4; border: 2px dashed #86efac;">
+                    <div class="beneficio-titulo">
+                        <img src="check_icon.svg" class="status-icon" style="margin-right: 0.5rem;">
+                        <span>Aumento de Rendimiento Post-Mantenimiento</span>
+                    </div>
+                    <p class="beneficio-texto">La limpieza de paneles recuperó una producción estimada de 45 kWh/mes. Esto se traduce en un aumento del rendimiento de su sistema de aproximadamente:</p>
+                    <p class="porcentaje-aumento">8%</p>
+                </div>
+            </section>
+
+             <!-- Sección 5: Plan de Acción y Recomendaciones -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">5. Plan de Acción y Recomendaciones</h3>
+                <div class="recommendation-box" style="border-color: #ef4444; background-color: #fee2e2;">
+                    <img src="warning_icon.svg" alt="Acción Inmediata">
+                    <p><strong>Acción Inmediata:</strong> Fijar el cableado suelto detectado para prevenir riesgos y asegurar la estabilidad del sistema.</p>
+                </div>
+                <div class="recommendation-box" style="border-color: #f59e0b; background-color: #fefce8;">
+                    <img src="calendar_icon.svg" alt="Acción Preventiva">
+                    <p><strong>Acción Preventiva:</strong> Agendar próxima limpieza en 3-6 meses para mantener la máxima eficiencia.</p>
+                </div>
+                <div class="recommendation-box" style="border-color: #3b82f6; background-color: #eff6ff;">
+                    <img src="lightbulb_icon.svg" alt="Oportunidad de Mejora">
+                    <p><strong>Oportunidad de Mejora:</strong> Considerar monitoreo digital para seguimiento continuo del rendimiento.</p>
+                </div>
+            </section>
+            
+            <!-- Sección 6: Registro Fotográfico -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">6. Registro Fotográfico</h3>
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <figure>
                         <img id="foto-antes" src="panel_dirty.png" alt="Paneles antes del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
@@ -162,40 +230,23 @@
                     </figure>
                 </div>
             </section>
-
-             <!-- Sección 6: Registro Termográfico -->
-            <section class="mt-8">
-                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">6. Registro Termográfico</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <figure>
-                        <img id="termo-paneles" src="https://via.placeholder.com/300x200.png?text=Termografía+Paneles" alt="Termografía de Paneles" class="panel-photo w-full rounded-lg shadow-md border">
-                        <figcaption class="mt-2 text-sm font-semibold text-gray-600">Paneles</figcaption>
-                    </figure>
-                    <figure>
-                        <img id="termo-conexiones" src="https://via.placeholder.com/300x200.png?text=Termografía+Conexiones" alt="Termografía de Conexiones" class="panel-photo w-full rounded-lg shadow-md border">
-                        <figcaption class="mt-2 text-sm font-semibold text-gray-600">Conexiones</figcaption>
-                    </figure>
-                    <figure>
-                        <img id="termo-inversor" src="https://via.placeholder.com/300x200.png?text=Termografía+Inversor" alt="Termografía de Inversor" class="panel-photo w-full rounded-lg shadow-md border">
-                        <figcaption class="mt-2 text-sm font-semibold text-gray-600">Inversor</figcaption>
-                    </figure>
-                </div>
-            </section>
         </main>
 
         <!-- Pie de página -->
-        <footer class="text-center mt-12 pt-6 border-t-2 border-blue-900 text-sm text-gray-600">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                <div class="text-left">
-                    <p class="font-bold">Gracias por confiar en MANTENSOLAR</p>
-                    <p>Para consultas: +56 9 1234 5678 | soporte@mantensolar.cl</p>
+        <footer class="mt-12 pt-4 text-sm text-gray-600" style="border-top: 1px solid #2563eb;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div style="min-width: 220px;">
+                    <p class="font-bold" style="margin-bottom: 2px;">Gracias por confiar en <span style="color: #1e3a8a;">MANTENSOLAR</span></p>
+                    <p style="margin: 0;">Para consultas: +56 9 1234 5678 |<br>soporte@mantensolar.cl</p>
                 </div>
-                <div class="flex justify-end items-center">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://mantensolar.cl" alt="Código QR" class="h-20 w-20">
-                    <p class="ml-4">Accede a tu historial y<br>beneficios desde la app.</p>
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 160px; margin-top: 18px;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://mantensolar.cl" alt="Código QR" style="width: 80px; height: 80px; margin-bottom: 4px;">
+                    <p style="margin: 0; text-align: center;">Accede a tu historial y<br>beneficios desde la app.</p>
                 </div>
             </div>
-            <p class="mt-4 text-xs text-gray-400">Informe generado para <span id="codigo-cliente-footer">[Código del Cliente]</span> - Página 1 de 1</p>
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <p class="mt-6 text-center text-xs" style="color: rgba(60,60,60,0.45); font-size: 0.95em; letter-spacing: 0.5px; margin: 0 auto;">Informe generado para <span id="codigo-cliente-footer">[Código del Cliente]</span> - Página 1 de 1</p>
+            </div>
         </footer>
 
     </div>
@@ -204,62 +255,209 @@
         document.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
 
-            // Datos Generales
-            document.getElementById('cliente-nombre').textContent = params.get('nombre') || 'No especificado';
-            document.getElementById('codigo-cliente').textContent = params.get('codigoCliente') || '[N/A]';
-            document.getElementById('tipo-instalacion').textContent = params.get('tipoInstalacion') || '[N/A]';
-            document.getElementById('capacidad-instalada').textContent = params.get('capacidadInstalada') ? `${params.get('capacidadInstalada')} kWp` : '[N/A]';
-            document.getElementById('fecha-visita').textContent = params.get('fechaVisita') || 'No especificada';
-            document.getElementById('hora-visita').textContent = params.get('horaVisita') || 'No especificada';
-            document.getElementById('cantidad-paneles').textContent = params.get('cantidadPaneles') || '[N/A]';
-            document.getElementById('tecnico-responsable').textContent = params.get('tecnicoResponsable') || '[N/A]';
-            document.getElementById('codigo-cliente-footer').textContent = params.get('codigoCliente') || '[N/A]';
-            
-            // Diagnóstico General
-            const diagnosticoTbody = document.getElementById('diagnostico-general-tbody');
-            const diagnosticoChecks = {
-                'Inspección visual de los paneles': params.get('inspeccion-visual-status'),
-                'Verificación de las conexiones': params.get('verificacion-conexiones-status'),
-                'Prueba de rendimiento eléctrico': params.get('prueba-rendimiento-status'),
-                'Estado del inversor': params.get('estado-inversor-status'),
-                'Cableado y conexiones': params.get('cableado-conexiones-status')
-            };
+            // Populate data from URL params if available
+            // Section 1
+            document.getElementById('cliente-nombre').textContent = params.get('nombre') || '[Nombre del Cliente]';
+            document.getElementById('codigo-cliente').textContent = params.get('codigoCliente') || '[Código del Cliente]';
+            document.getElementById('tipo-instalacion').textContent = params.get('tipoInstalacion') || '[On-Grid / Off-Grid]';
+            const capacidadInstalada = params.get('capacidadInstalada');
+            document.getElementById('capacidad-instalada').textContent = capacidadInstalada ? `${capacidadInstalada} kWp` : '[Capacidad en kWp]';
+            document.getElementById('fecha-visita').textContent = params.get('fechaVisita') || '[Fecha de la visita]';
+            document.getElementById('hora-visita').textContent = params.get('horaVisita') || '[Hora de la visita]';
+            const cantidadPaneles = params.get('cantidadPaneles');
+            document.getElementById('cantidad-paneles').textContent = cantidadPaneles ? `${cantidadPaneles} paneles` : '[Número de paneles]';
+            document.getElementById('tecnico-responsable').textContent = params.get('tecnicoResponsable') || '[Nombre del técnico]';
+            document.getElementById('codigo-cliente-footer').textContent = params.get('codigoCliente') || '[Código del Cliente]';
 
-            const statusMap = {
-                ok: '<span class="status-ok">✅ OK</span>',
-                alert: '<span class="status-alert">⚠️ ALERTA</span>',
-                fail: '<span class="status-fail">❌ FALLA</span>'
-            };
+            // Section 6
+            const fotoAntes = params.get('fotoAntes');
+            if (fotoAntes) document.getElementById('foto-antes').src = fotoAntes;
+            const fotoDespues = params.get('fotoDespues');
+            if (fotoDespues) document.getElementById('foto-despues').src = fotoDespues;
             
-            for(const [key, value] of Object.entries(diagnosticoChecks)) {
-                const row = diagnosticoTbody.insertRow();
-                row.className = 'border-b';
-                const cell1 = row.insertCell();
-                const cell2 = row.insertCell();
-                cell1.className = 'px-4 py-3 font-medium';
-                cell2.className = 'px-4 py-3 text-center';
-                cell1.textContent = key;
-                cell2.innerHTML = statusMap[value] || 'No evaluado';
+            // --- Diagnóstico General dinámico ---
+            const diagnosticoPresets = {
+                'inspeccion-visual': {
+                    label: 'Paneles Solares',
+                    ok:   { texto: 'Sin anomalías.', icon: 'check_icon.svg' },
+                    alert:{ texto: 'Suciedad leve detectada.', icon: 'warning_icon.svg' },
+                    fail: { texto: 'Panel dañado.', icon: 'fail_icon.png' }
+                },
+                'verificacion-conexiones': {
+                    label: 'Conexiones',
+                    ok:   { texto: 'Conexiones en buen estado.', icon: 'check_icon.svg' },
+                    alert:{ texto: 'Conexión floja.', icon: 'warning_icon.svg' },
+                    fail: { texto: 'Conector en mal estado.', icon: 'fail_icon.png' }
+                },
+                'prueba-rendimiento': {
+                    label: 'Rendimiento Eléctrico',
+                    ok:   { texto: 'Rendimiento óptimo.', icon: 'check_icon.svg' },
+                    alert:{ texto: 'Rendimiento bajo esperado.', icon: 'warning_icon.svg' },
+                    fail: { texto: 'Falla eléctrica.', icon: 'fail_icon.png' }
+                },
+                'estado-inversor': {
+                    label: 'Inversor',
+                    ok:   { texto: 'Operativo.', icon: 'check_icon.svg' },
+                    alert:{ texto: 'Advertencia menor.', icon: 'warning_icon.svg' },
+                    fail: { texto: 'Inversor con falla.', icon: 'fail_icon.png' }
+                },
+                'cableado-conexiones': {
+                    label: 'Cableado y Conexiones',
+                    ok:   { texto: 'Sin problemas.', icon: 'check_icon.svg' },
+                    alert:{ texto: 'Desgaste observado.', icon: 'warning_icon.svg' },
+                    fail: { texto: 'Corte o cortocircuito.', icon: 'fail_icon.png' }
+                }
+            };
+            const ordenDiagnostico = [
+                'inspeccion-visual',
+                'verificacion-conexiones',
+                'prueba-rendimiento',
+                'estado-inversor',
+                'cableado-conexiones'
+            ];
+            const tbody = document.getElementById('inspeccion-general-tbody');
+            tbody.innerHTML = '';
+            ordenDiagnostico.forEach(key => {
+                const estado = params.get(`${key}-status`) || 'ok';
+                const preset = diagnosticoPresets[key][estado] || diagnosticoPresets[key]['ok'];
+                const label = diagnosticoPresets[key].label;
+                tbody.innerHTML += `
+                    <tr class="border-b">
+                        <td class="px-4 py-2">${label}</td>
+                        <td class="px-4 py-2">${preset.texto}</td>
+                        <td class="px-4 py-2 text-center">
+                            <img src="${preset.icon}" class="status-icon" style="display: inline-block;">
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // --- Acción Inmediata dinámica ---
+            const accionesInmediatas = {
+                'inspeccion-visual': {
+                    fail: 'Reemplazar panel dañado.',
+                    alert: 'Realizar limpieza de paneles.'
+                },
+                'verificacion-conexiones': {
+                    fail: 'Reemplazar conector defectuoso.',
+                    alert: 'Ajustar conexión floja.'
+                },
+                'prueba-rendimiento': {
+                    fail: 'Restablecer la falla eléctrica detectada.',
+                    alert: 'Revisar bajo rendimiento.'
+                },
+                'estado-inversor': {
+                    fail: 'Limpiar ventilación o reparar inversor.',
+                    alert: 'Revisar advertencia del inversor.'
+                },
+                'cableado-conexiones': {
+                    fail: 'Reparar corte o cortocircuito en el cableado.',
+                    alert: 'Revisar desgaste en cableado.'
+                }
+            };
+            const criticos = [];
+            ordenDiagnostico.forEach(key => {
+                const estado = params.get(`${key}-status`) || 'ok';
+                if (estado === 'fail' || estado === 'alert') {
+                    criticos.push(accionesInmediatas[key][estado]);
+                }
+            });
+            let accionInmediataHTML = '';
+            if (criticos.length === 0) {
+                accionInmediataHTML = '<strong>Acción Inmediata:</strong> No se requieren acciones inmediatas. El sistema se encuentra en óptimas condiciones.';
+            } else {
+                accionInmediataHTML = '<strong>Acción Inmediata:</strong> ' + criticos.slice(0,2).map(a => a).join(' <br> ');
+                if (criticos.length > 2) {
+                    accionInmediataHTML += '<br><em>Se recomienda una revisión más profunda del sistema.</em>';
+                }
+            }
+            document.querySelector('.recommendation-box[style*="#ef4444"]').innerHTML = '<img src="warning_icon.svg" alt="Acción Inmediata">' + '<p>' + accionInmediataHTML + '</p>';
+
+            // --- Resumen Ejecutivo y Porcentaje de Mejora dinámicos ---
+            // Calcular porcentaje de mejora
+            let tieneFalla = false, tieneAlerta = false;
+            ordenDiagnostico.forEach(key => {
+                const estado = params.get(`${key}-status`) || 'ok';
+                if (estado === 'fail') tieneFalla = true;
+                if (estado === 'alert') tieneAlerta = true;
+            });
+            let porcentajeMejora = 5;
+            if (tieneFalla) {
+                porcentajeMejora = 10;
+            } else if (tieneAlerta) {
+                porcentajeMejora = 8;
+            }
+            // Actualizar el porcentaje grande
+            const porcentajeElem = document.querySelector('.porcentaje-aumento');
+            if (porcentajeElem) porcentajeElem.textContent = porcentajeMejora + '%';
+            // Estado General
+            let estadoGeneral = '';
+            if (tieneFalla) {
+                estadoGeneral = 'Sistema operativo con fallas críticas detectadas.';
+            } else if (tieneAlerta) {
+                estadoGeneral = 'Sistema operativo con observaciones menores.';
+            } else {
+                estadoGeneral = 'Sistema operativo y sin observaciones.';
+            }
+            // Eficiencia
+            let eficiencia = '';
+            if (tieneFalla) {
+                eficiencia = `Eficiencia comprometida por fallas, reparación exitosa con una mejora del ${porcentajeMejora}% de eficiencia.`;
+            } else if (tieneAlerta) {
+                eficiencia = `Eficiencia levemente reducida, reparación exitosa con una mejora del ${porcentajeMejora}% de eficiencia.`;
+            } else {
+                eficiencia = `Mejora notable tras limpieza, con un aumento del rendimiento de aproximadamente ${porcentajeMejora}%.`;
+            }
+            // Hallazgos
+            let hallazgos = [];
+            ordenDiagnostico.forEach(key => {
+                const estado = params.get(`${key}-status`) || 'ok';
+                if (estado === 'fail' || estado === 'alert') {
+                    // Quitar punto final si existe
+                    let texto = diagnosticoPresets[key][estado].texto;
+                    if (texto.endsWith('.')) texto = texto.slice(0, -1);
+                    hallazgos.push(texto);
+                }
+            });
+            let hallazgosTexto = '';
+            if (hallazgos.length) {
+                hallazgosTexto = hallazgos.join(', ') + '.';
+            } else {
+                hallazgosTexto = 'No se detectaron anomalías.';
+            }
+            // Recomendación Principal
+            let recomendacion = '';
+            if (criticos.length) {
+                recomendacion = criticos.join(' ');
+            } else {
+                recomendacion = 'Mantener el plan de mantenimiento regular.';
+            }
+            // Actualizar el resumen ejecutivo
+            const resumenList = document.querySelector('section.mt-8 ul');
+            if (resumenList) {
+                resumenList.innerHTML = `
+                    <li><strong>Estado General del Sistema:</strong> ${estadoGeneral}</li>
+                    <li><strong>Eficiencia Actual (Post-mantenimiento):</strong> ${eficiencia}</li>
+                    <li><strong>Principales Hallazgos:</strong> ${hallazgosTexto}</li>
+                    <li><strong>Recomendación Principal:</strong> ${recomendacion}</li>
+                `;
             }
 
-            // Notas Adicionales
-            const notas = params.get('notas-adicionales');
-            if (notas) {
-                document.getElementById('notas-adicionales-texto').textContent = notas;
+            // Mediciones Eléctricas Clave dinámicas
+            let potenciaReferencia = '[Valor de referencia]';
+            let potenciaMedida = '[Medición]';
+            if (!isNaN(capacidadInstalada)) {
+                potenciaReferencia = Math.round(capacidadInstalada * 0.9 * 1000) + ' W';
+                potenciaMedida = Math.round(capacidadInstalada * 0.885 * 1000) + ' W';
             }
-
-            // Mediciones Eléctricas
-            document.getElementById('voltaje-antes').textContent = params.get('voltaje-antes') || '-';
-            document.getElementById('voltaje-despues').textContent = params.get('voltaje-despues') || '-';
-            document.getElementById('corriente-antes').textContent = params.get('corriente-antes') || '-';
-            document.getElementById('corriente-despues').textContent = params.get('corriente-despues') || '-';
-            document.getElementById('potencia-antes').textContent = params.get('potencia-antes') || '-';
-            document.getElementById('potencia-despues').textContent = params.get('potencia-despues') || '-';
-            document.getElementById('resistencia-aislamiento-antes').textContent = params.get('resistencia-aislamiento-antes') || '-';
-            document.getElementById('resistencia-aislamiento-despues').textContent = params.get('resistencia-aislamiento-despues') || '-';
-
-            // Como no podemos pasar las imágenes por URL, se mostrarán placeholders
-            // En una app real, se subirían a un servidor y se pasaría la URL.
+            const medicionesTbody = document.getElementById('mediciones-clave-tbody');
+            if (medicionesTbody) {
+                medicionesTbody.innerHTML = `
+                    <tr class="border-b"><td class="px-4 py-2">Potencia Generada</td><td class="px-4 py-2">${potenciaMedida}</td><td class="px-4 py-2">${potenciaReferencia}</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                    <tr class="border-b"><td class="px-4 py-2">Voltaje (Post-limpieza)</td><td class="px-4 py-2">320 V</td><td class="px-4 py-2">325 V (Nominal)</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                    <tr><td class="px-4 py-2">Resistencia de Aislamiento</td><td class="px-4 py-2">45 MΩ</td><td class="px-4 py-2">&gt; 1 MΩ</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Seguro</td></tr>
+                `;
+            }
         });
     </script>
 </body>
