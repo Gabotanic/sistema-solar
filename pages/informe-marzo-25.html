@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Mantenimiento Fotovoltaico - MANTENSOLAR</title>
+    <link rel="stylesheet" href="../informe/style.css">
+    <style>
+        /* Estilos adicionales para impresión y apariencia */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 2rem auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .print-hide {
+             display: none;
+        }
+        @media print {
+            body {
+                margin: 0;
+                background-color: white;
+            }
+            .page-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 15mm;
+            }
+            .print-hide {
+                display: block;
+                text-align: center;
+                padding: 1rem;
+                background-color: #e0f2fe;
+                color: #0c5460;
+            }
+        }
+        .status-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            vertical-align: middle;
+        }
+        .recommendation-box {
+            border-left-width: 4px;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .recommendation-box img {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+        .porcentaje-aumento {
+            color: #16a34a;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        /* Cambios de estilo para la sección de Rendimiento y Beneficios y resumen ejecutivo */
+        .beneficio-block {
+            text-align: center;
+        }
+        .beneficio-titulo {
+            font-size: 1.18rem;
+            font-weight: bold;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .beneficio-texto {
+            font-size: 1.01rem;
+            color: #222;
+            margin-bottom: 0.7rem;
+            font-family: inherit;
+            font-weight: 400;
+        }
+        .resumen-ejecutivo-lista {
+            font-size: 1.01rem;
+            color: #222;
+            font-family: inherit;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="page-container">
+        <!-- Encabezado con Logo -->
+        <header class="flex flex-col items-center py-0.5 px-1 bg-blue-900 rounded-t-lg" style="padding: 1rem; background-color: #1e3a8a;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="../informe/mantensolar_logo_notext.png" alt="Logo MANTENSOLAR" class="h-16" style="height: 48px; margin-bottom: 4px;">
+                <span style="color: rgb(255, 241, 210); font-size: 1rem; font-weight: bold; letter-spacing: 1.5px;">MANTENSOLAR</span>
+            </div>
+            <h2 class="text-base font-semibold text-white" style="font-size: 1.25rem; margin-top: 0.5rem;">Informe de Mantenimiento</h2>
+        </header>
+
+        <main class="mt-8">
+            <!-- Sección 1: Datos Generales del Servicio -->
+            <section>
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">1. Datos Generales del Servicio</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
+                    <div>
+                        <p><strong>Cliente:</strong> Luz Solarini</p>
+                        <p><strong>Código N°:</strong> CL-008</p>
+                        <p><strong>Tipo de Instalación:</strong> On-Grid</p>
+                        <p><strong>Capacidad Instalada:</strong> 4.8 kWp</p>
+                    </div>
+                    <div>
+                        <p><strong>Fecha de Visita:</strong> 15-03-2025</p>
+                        <p><strong>Hora de Visita:</strong> 09:30</p>
+                        <p><strong>Cantidad de Paneles:</strong> 12</p>
+                        <p><strong>Técnico Responsable:</strong> Juan Carrasco</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 2: Resumen Ejecutivo -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">2. Resumen Ejecutivo</h3>
+                <div class="bg-blue-50 p-4 rounded-lg text-sm" style="background-color: #eff6ff;">
+                    <ul class="list-disc list-inside space-y-2 resumen-ejecutivo-lista" style="padding-left: 1rem;">
+                        <li><strong>Estado General del Sistema:</strong> Requiere atención en inspección visual</li>
+                        <li><strong>Eficiencia Actual (Post-mantenimiento):</strong> 85%</li>
+                        <li><strong>Principales Hallazgos:</strong> Suciedad moderada en paneles, conexiones en buen estado</li>
+                        <li><strong>Recomendación Principal:</strong> Limpieza de paneles para optimizar rendimiento</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 3: Diagnóstico Detallado del Sistema -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">3. Diagnóstico Detallado del Sistema</h3>
+                
+                <h4 class="text-lg font-semibold text-gray-800 mb-3 mt-4" style="font-size: 1.1rem;">3.1. Inspección General y Termografía</h4>
+                <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-4 py-2 rounded-l-lg font-bold">COMPONENTE / PARÁMETRO</th>
+                            <th scope="col" class="px-4 py-2 font-bold">RESULTADO</th>
+                            <th scope="col" class="px-4 py-2 text-center rounded-r-lg font-bold">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b"><td class="px-4 py-2">Inspección visual de los paneles</td><td class="px-4 py-2">Suciedad moderada detectada</td><td class="px-4 py-2 text-center"><img src="../informe/warning_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Verificación de las conexiones</td><td class="px-4 py-2">Todas las conexiones en buen estado</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Prueba de rendimiento eléctrico</td><td class="px-4 py-2">Rendimiento dentro de parámetros normales</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Estado del inversor</td><td class="px-4 py-2">Funcionamiento óptimo</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr><td class="px-4 py-2">Cableado y conexiones</td><td class="px-4 py-2">Cableado en excelente estado</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                    </tbody>
+                    <tbody>
+                        <tr class="border-b"><td class="px-4 py-2">Puntos Calientes (Termografía)</td><td class="px-4 py-2">No visibles.</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Temperatura Máxima</td><td class="px-4 py-2">44.8°C (Normal).</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                        <tr><td class="px-4 py-2">Delta Térmico entre Módulos</td><td class="px-4 py-2">10.3°C (Aceptable).</td><td class="px-4 py-2 text-center"><img src="../informe/check_icon.svg" class="status-icon" style="display: inline-block;"></td></tr>
+                    </tbody>
+                </table>
+                
+                <h4 class="text-lg font-semibold text-gray-800 mb-3 mt-6" style="font-size: 1.1rem;">3.2. Mediciones Eléctricas Clave</h4>
+                 <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs text-gray-800 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="px-4 py-2 rounded-l-lg font-bold">PARÁMETRO</th>
+                            <th scope="col" class="px-4 py-2 font-bold">MEDICIÓN</th>
+                            <th scope="col" class="px-4 py-2 font-bold">VALOR DE REFERENCIA</th>
+                            <th scope="col" class="px-4 py-2 rounded-r-lg font-bold">DIAGNÓSTICO</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b"><td class="px-4 py-2">Potencia Generada</td><td class="px-4 py-2">4080 W</td><td class="px-4 py-2">~4500 W</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                        <tr class="border-b"><td class="px-4 py-2">Voltaje (Post-limpieza)</td><td class="px-4 py-2">320 V</td><td class="px-4 py-2">325 V (Nominal)</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Óptimo</td></tr>
+                        <tr><td class="px-4 py-2">Resistencia de Aislamiento</td><td class="px-4 py-2">45 MΩ</td><td class="px-4 py-2">> 1 MΩ</td><td class="px-4 py-2" style="color: #16a34a; font-weight: bold;">Seguro</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Sección 4: Rendimiento y Beneficios -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">4. Rendimiento y Beneficios</h3>
+                <div class="p-4 rounded-lg text-sm beneficio-block" style="background-color: #f0fdf4; border: 2px dashed #86efac;">
+                    <div class="beneficio-titulo">
+                        <img src="../informe/check_icon.svg" class="status-icon" style="margin-right: 0.5rem;">
+                        <span>Aumento de Rendimiento Post-Mantenimiento</span>
+                    </div>
+                    <p class="beneficio-texto">La limpieza de paneles recuperó una producción estimada de 45 kWh/mes. Esto se traduce en un aumento del rendimiento de su sistema de aproximadamente:</p>
+                    <p class="porcentaje-aumento">8%</p>
+                </div>
+            </section>
+
+             <!-- Sección 5: Plan de Acción y Recomendaciones -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">5. Plan de Acción y Recomendaciones</h3>
+                <div class="recommendation-box" style="border-color: #f59e0b; background-color: #fefce8;">
+                    <img src="../informe/warning_icon.svg" alt="Acción Inmediata">
+                    <p><strong>Acción Inmediata:</strong> Realizar limpieza de paneles para eliminar suciedad acumulada y optimizar rendimiento.</p>
+                </div>
+                <div class="recommendation-box" style="border-color: #f59e0b; background-color: #fefce8;">
+                    <img src="../informe/calendar_icon.svg" alt="Acción Preventiva">
+                    <p><strong>Acción Preventiva:</strong> Agendar próxima limpieza en 3-6 meses para mantener la máxima eficiencia.</p>
+                </div>
+                <div class="recommendation-box" style="border-color: #3b82f6; background-color: #eff6ff;">
+                    <img src="../informe/lightbulb_icon.svg" alt="Oportunidad de Mejora">
+                    <p><strong>Oportunidad de Mejora:</strong> Considerar monitoreo digital para seguimiento continuo del rendimiento.</p>
+                </div>
+            </section>
+            
+            <!-- Sección 6: Registro Fotográfico -->
+            <section class="mt-8">
+                <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-4">6. Registro Fotográfico</h3>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <figure>
+                        <img src="../informe/panel_dirty.png" alt="Paneles antes del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
+                        <figcaption class="mt-2 text-sm font-semibold text-gray-600">ANTES del Mantenimiento</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="../informe/panel_clean.png" alt="Paneles después del mantenimiento" class="panel-photo w-full rounded-lg shadow-md border">
+                        <figcaption class="mt-2 text-sm font-semibold text-gray-600">DESPUÉS del Mantenimiento</figcaption>
+                    </figure>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="mt-12 pt-4 text-sm text-gray-600" style="border-top: 1px solid #2563eb;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div style="min-width: 220px;">
+                    <p class="font-bold" style="margin-bottom: 2px;">Gracias por confiar en <span style="color: #1e3a8a;">MANTENSOLAR</span></p>
+                    <p style="margin: 0;">Para consultas: +56 9 1234 5678 |<br>soporte@mantensolar.cl</p>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; min-width: 160px; margin-top: 18px;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://mantensolar.cl" alt="Código QR" style="width: 80px; height: 80px; margin-bottom: 4px;">
+                    <p style="margin: 0; text-align: center;">Accede a tu historial y<br>beneficios desde la app.</p>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <p class="mt-6 text-center text-xs" style="color: rgba(60,60,60,0.45); font-size: 0.95em; letter-spacing: 0.5px; margin: 0 auto;">Informe generado para CL-008 - Página 1 de 1</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html> 
